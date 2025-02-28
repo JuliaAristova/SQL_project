@@ -1,0 +1,25 @@
+ISNULL(value, replacementValue) - only 2 values allowed   (ISNULL - SQL Server, NVL - Oracle, IFNULL - MySql)
+COALSESCE(value,  replacementValue_1,  replacementValue_2) (unlimited number of values, all DBs)
+
+USE Cases:
+1. Handling NULLs before aggregation (example, calculate AVG)
+2. Handling NULLS before arithmetic operations (NULL + 5 = NULL, firstName + lastName = NULL if one of them is NULL)
+3. Handling NULL before joining tables (result is unpredictable if one of the joining columns has NULL value)
+4. Handling NULL before sorting data (can use flag to keep NULLs at the end)
+
+NULLIF()
+Use Case:
+1. Preventing dividing by 0 (replaces 0 by NULL)
+
+IS NULL, IS NOT NULL
+Use Case:
+1. Searching for missing information: Anti Joins ( LEFT JOIN ON ..., WHERE <column_name> IS NULL
+
+NULL - EMPTY STRING - BLANK
+Use Cases:
+Replacing
+- NULLs, Empty strings, blank with default value
+- Variations: replacing empty string, blanks, empty strings and blanks
+
+NOTE:
+We cannot use = , !=, <> with NULL values
