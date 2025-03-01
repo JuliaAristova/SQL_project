@@ -1,0 +1,13 @@
+CASE
+  WHEN condition_1 THEN result_1
+  WHEN condition_2 THEN result_2
+END
+Case statement evaluates a list of conditions and returns a value when the first condition is met
+
+Use Cases:
+1. Derive new information - create a new columns based on existing data. Example - categorizung data - group
+data into categories based on certain conditions (categorize sales on high, medium. low)
+2. Mapping - transform data from on form to another (ex, country name --> country code (Germany --> DE)
+3. Handling NULLs - replace NULL with a specific value
+4. Conditional Aggregation - apply aggregate functions only to subset of data that fulfill certain conditions 
+(example, for each customer, count number of orders greater than 30) 
