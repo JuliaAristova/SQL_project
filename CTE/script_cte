@@ -1,0 +1,12 @@
+--find the running total of sales for each month
+
+WITH CTE_MonthlySummary AS (
+	SELECT DATETRUNC(month, OrderDate) AS orderMonth,
+	SUM(Sales) AS totalSales
+	FROM Sales.Orders
+	GROUP BY DATETRUNC(month, OrderDate)
+)
+SELECT orderMonth, 
+totalSales,
+SUM(totalSales) OVER(ORDER BY orderMonth) AS runningTotal
+FROM CTE_MonthlySummary
