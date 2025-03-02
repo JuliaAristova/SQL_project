@@ -1,0 +1,38 @@
+--show customer details, 
+--last order, 
+--total sales, 
+--rank customers based on total sales  - nested CTE
+--categorized based on total sales - nested CTE
+WITH 
+CTE_totalSales AS (
+	SELECT CustomerID, SUM(Sales) as totalSales
+	FROM Sales.Orders
+	GROUP BY CustomerID),
+CTE_lastOrder AS (
+	SELECT CustomerID, MAX(OrderDate) as lastOrder
+	FROM Sales.Orders
+	GROUP BY CustomerID),
+CTE_customerRank AS (
+	SELECT CustomerID, totalSales,
+	RANK() OVER(ORDER BY totalSales DESC) as customerRank
+	FROM CTE_totalSales),
+CTE_customerSegment AS (
+	SELECT CustomerID, totalSales,
+	CASE
+		WHEN totalSales > 100 THEN 'High'
+		WHEN totalSales > 80 THEN 'Medium'
+		Else 'Low'
+	END category
+	FROM CTE_totalSales)
+SELECT 
+	c.CustomerID, c.FirstName, c.LastName,
+	ts.totalSales,
+	lo.lastOrder,
+	cr.customerRank,
+	cs.category
+FROM Sales.Customers c
+LEFT JOIN CTE_totalSales ts ON ts.CustomerID = c.CustomerID 
+LEFT JOIN CTE_lastOrder lo ON lo.CustomerID = c.CustomerID 
+LEFT JOIN CTE_customerRank cr ON cr.CustomerID = c.CustomerID 
+LEFT JOIN CTE_customerSegment cs ON cs.CustomerID = c.CustomerID 
+ORDER BY CustomerID
