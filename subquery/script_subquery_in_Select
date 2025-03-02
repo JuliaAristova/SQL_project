@@ -1,0 +1,12 @@
+--subquery in SELECT
+
+--show productIDs, product names, prices and total number of all orders
+SELECT productID, product, price,
+(SELECT SUM(Sales) FROM Sales.ORDERS) as totalSales
+FROM Sales.Products
+
+--find a product that have a price higher than the average price of all products
+SELECT * FROM 
+	(SELECT ProductID, Price, AVG(price) OVER() as avgPrice
+	 FROM Sales.Products)t
+WHERE price > avgPrice
