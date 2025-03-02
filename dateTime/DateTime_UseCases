@@ -1,0 +1,48 @@
+DATE&TIME FUNCTIONS
+
+Date
+Time
+TimeStamp
+DateTime2
+
+Values:
+- column (date, timestamp)
+- hardcoded
+- GETDATE() - returns current date
+
+1. PART EXTRACTION
+YEAR()
+MONTH()
+DAY()
+DATEPART(part, date)  -- week, quarter, month, etc.
+DATENAME(part, date)  -- weekday. month
+DATETRUNC(part, date) --truncates date to specific part. Reset time to 0, day/month to 01
+EOMONTH(date) - returns the last day of a month
+
+Use Cases:
+1. Data aggregation and reporting (ex., GROUP BY YEAR(OrderDate)
+2. Data filtering (ex., WHERE MONTH(OrderDate) = 2)
+
+2. FORMATTING
+FORMAT(value, format [, culture]) - applys to date&time, numbers
+
+Use Cases:
+1. Data aggregationand reporting (GROUP BY FORMAT(OrderDate, 'MMM yy')
+2. Data standardization - standardize data from different sources to the selected format 
+
+CAST() - converts a value(any type) to a specified data type; no formatting
+
+CONVERT(data_type, value [,style]) - applies to any type. Formats date&time
+
+3. CALCULATIONS
+
+DATEADD(part, interval, date) - adds/subtracts interval from part of date
+DATEDIFF(part, startDate, endDate) 
+
+Use case:
+TimeGap analysis
+
+4. VALIDATION
+
+ISDATE(value) - checks if value is a date 
+4. 
