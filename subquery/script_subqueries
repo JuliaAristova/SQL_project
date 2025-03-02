@@ -1,0 +1,62 @@
+--SUBQUERY in SELECT
+
+--show productIDs, product names, prices and total number of all orders
+SELECT productID, product, price,
+(SELECT SUM(Sales) FROM Sales.ORDERS) as totalSales
+FROM Sales.Products
+
+
+--SUBQUERY in FROM
+
+--find a product that have a price higher than the average price of all products
+SELECT * 
+FROM  (SELECT ProductID, Price, AVG(price) OVER() as avgPrice FROM Sales.Products)t
+WHERE price > avgPrice
+
+--rank customers by total sales
+SELECT *, RANK() OVER(ORDER BY totalCustomerSales DESC) AS customerRank
+FROM (
+	SELECT CustomerID, SUM(Sales) as totalCustomerSales
+	FROM Sales.Orders
+	GROUP BY CustomerID
+	)t
+
+--SUBQUERY in JOIN
+
+--show all customers details and find the total orders for each customer
+SELECT c.*, o.totalOrder FROM Sales.Customers c
+LEFT JOIN (SELECT CustomerID, COUNT(OrderID) as totalOrder
+			FROM Sales.Orders 
+			GROUP BY (CustomerID))o
+ON c.CustomerID = o.CustomerID
+
+--SUBQUERY in WHERE
+
+--SUBQUERY in WHERE
+
+--find the products that have a price higher than the aveage price of all products
+SELECT * FROM Sales.Products
+WHERE price > (SELECT AVG(price) FROM Sales.Products)
+
+--show details of orders made by customers in Germany
+SELECT * FROM Sales.Orders
+WHERE CustomerID IN (Select CustomerID FROM Sales.Customers WHERE Country = 'Germany')
+
+--WHERE: ANY--ALL--EXISTS--
+
+--select female employees whose salaries are greater 
+--that the salary of ANY male employee
+SELECT * FROM Sales.Employees Order BY Salary DESC 
+
+SELECT * FROM Sales.Employees
+WHERE gender = 'F' and salary > ANY (SELECT salary FROM Sales.Employees WHERE gender = 'M')
+
+--select female employees whose salaries are greater 
+--that the salary of ALL male employee
+SELECT * FROM Sales.Employees
+WHERE gender = 'F' and salary > ALL (SELECT salary FROM Sales.Employees WHERE gender = 'M')
+
+--show the order details for customers in Germany
+SELECT * FROM Sales.Orders o
+WHERE EXISTS (SELECT * FROM Sales.Customers c
+	      WHERE country = 'Germany' AND o.CUstomerID = c.CustomerID)
