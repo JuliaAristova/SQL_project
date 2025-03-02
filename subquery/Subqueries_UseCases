@@ -1,0 +1,26 @@
+Subquery - query inside Nother Query. Breaks complex query into smaller, manageble pieces.
+
+Types:
+- Non-Correlated - can run independently from main query
+- Correlated - relies on values from the main query
+
+By result type:
+- Scalar subquery - returns a singgle value
+- Row subquery - returns multiple rows & single column
+- Table sunquery - returns multiple rows & miltiple columns
+
+By location:
+- Subruery in SELECT
+- Subruery in FROM
+- Subruery in JOIN 
+- Subruery in WHERE 
+  - ANY - checks if value matches ANY value within the list
+  - ALL - checks if value matches ALL values within the list
+  - EXISTS (NON EXISTS) - check if subquery returns any rows
+
+USE CASES:
+- Create temporary result set
+- Prepare data before joining tables
+- Dynamic & Complex filtering
+- Check the existence of rows from another tables
+- Row by Row comparison (correlated subquery)
