@@ -1,0 +1,30 @@
+--write a query for US customers. 
+--Find the total number of customers and the average score.
+SELECT 
+	count(*) AS numCustomers, 
+	AVG(Score) AS avgScore
+FROM Sales.Customers
+WHERE country = 'USA'
+
+--turning the query to Stored Procedure
+CREATE PROCEDURE getCustomerSummary AS 
+BEGIN
+	SELECT 
+		count(*) AS numCustomers, 
+		AVG(Score) AS avgScore
+	FROM Sales.Customers
+	WHERE COUNTRY = 'USA'
+END
+
+--execute stored procedure
+EXEC  getCustomerSummary
+
+--make changed is stored procedure
+ALTER PROCEDURE <procedure_name>
+AS
+BEGIN
+    --sql statements
+END
+
+--delete pro
+DROP PROCEDURE <procedure_name>
