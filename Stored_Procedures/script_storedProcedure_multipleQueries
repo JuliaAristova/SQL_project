@@ -1,0 +1,20 @@
+--multiple queries
+ALTER PROCEDURE getCustomerSummary @Country NVARCHAR(50) = 'USA'
+AS 
+BEGIN
+	 SELECT 
+		  COUNT(*) AS numCustomers, 
+		  AVG(Score) AS avgScore
+   FROM Sales.Customers
+   WHERE Country = @Country;
+
+   SELECT 
+	    COUNT(OrderID) AS numOrders, 
+	    SUM(Sales) AS totalSales
+   FROM Sales.Orders o
+   JOIN Sales.Customers c ON c.CustomerID = o.CustomerID
+   WHERE c.Country = @Country;
+END
+
+EXEC getCustomerSummary @Country = 'Germany'
+EXEC getCustomerSummary
