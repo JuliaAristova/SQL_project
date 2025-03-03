@@ -1,0 +1,24 @@
+View :
+- virtual table based on result of query without storing data. 
+- we use views to persist complexx SQL query in dayabase.
+- better that CTE - improves reusability in multiple querie
+- better than tables - flexible, easy to maintain
+- read only
+
+IF OBJECT_ID('viewName', 'V') IS NOT NULL
+DROP VIEW viewName
+GO
+CREATE VIEW viewName AS (
+  SELECT ...
+  FROM ...
+  WHERE...
+)
+
+USE CASEs:
+1. Central QUery Logic - store central, complex query logic in the database to be accessible by multiple queries, reducing project complexity.
+2. Security - views can be used to enforce security and protect sensitive data by hiding columns and/or rows from tables (Column security, Row sucurity) 
+  (ex. WHERE c.country != USA - view will not contain the data connected to USA)
+3.  Flexibility & Dynamic - if there are any changes in DB (renamed columns, splitted tables -> update connected view and changes won't be noticed by view users)
+4.  Hide complexity - (view can create a number of joins, formatting, casting, etc.)
+5. Multiple languages - you can name view columns in a different language using aliases
+6. Views can be used as Virtual Data Marts in DWH because they provide a flexible and efficient ay to present data.
