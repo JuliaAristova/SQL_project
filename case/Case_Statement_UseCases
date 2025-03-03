@@ -2,7 +2,9 @@ CASE
   WHEN condition_1 THEN result_1
   WHEN condition_2 THEN result_2
 END
-Case statement evaluates a list of conditions and returns a value when the first condition is met
+Case statement evaluates a list of conditions and returns a value when the first condition is met.
+If no conditions are true, it returns the value in the ELSE clause.
+If there is no ELSE part and no conditions are true, it returns NULL.
 
 Use Cases:
 1. Derive new information - create a new columns based on existing data. 
