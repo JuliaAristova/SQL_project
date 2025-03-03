@@ -1,0 +1,14 @@
+--SP with parameters - @<anyName> dataType, default value - USA
+
+ALTER PROCEDURE getCustomerSummary @Country NVARCHAR(50) = 'USA'
+AS 
+BEGIN
+	SELECT 
+		count(*) AS numCustomers, 
+		AVG(Score) AS avgScore
+FROM Sales.Customers
+WHERE Country = @Country
+END
+
+EXEC getCustomerSummary @Country = 'Germany'
+EXEC getCustomerSummary
