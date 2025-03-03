@@ -77,3 +77,12 @@ SELECT CustomerID,
 	COUNT(*) As totalOrders
 FROM Sales.Orders
 GROUP BY CustomerID
+
+--CASE in ORDER BY
+SELECT CustomerName, City, Country
+FROM Customers
+ORDER BY
+(CASE
+    WHEN City IS NULL THEN Country
+    ELSE City
+END);
