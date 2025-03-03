@@ -6,8 +6,8 @@ BEGIN
 	SELECT 
 		count(*) AS numCustomers, 
 		AVG(Score) AS avgScore
-FROM Sales.Customers
-WHERE Country = @Country
+	FROM Sales.Customers
+	WHERE Country = @Country
 END
 
 EXEC getCustomerSummary @Country = 'Germany'
