@@ -1,0 +1,22 @@
+CTE - Common Table Expression 
+Temporary, names result set, that can be used multiple times within your query to simplify and organize complex query.
+
+Note: you cannot use ORDER BY in CTE
+
+- Standalone (can be multiple) - can be run independently
+- Nested - CTE inside another CTE (uses its result ==> cannot be run independently)
+- Recursive - self-referencing query that repeatedly processes data until a specific condition is met.
+
+--multiple
+WITH CTE_name as (SELECT ... FROM ... WHERE ...), 
+     CTE_name_2 as (SELECT ... FROM ... WHERE ...)
+SELECT ...
+FROM CTE_name
+JOIN CTE_name_2
+WHERE ...
+
+Advantages:
+- Readability - breaks down complex queries into smaller pieses (DO NOT OVERUSE)
+- Modularity - pieces are easy to manage, develop, and self-contained
+- Reusability - reduce redundancy in query
+- Recursive - looping in SQL
