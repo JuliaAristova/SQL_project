@@ -1,0 +1,39 @@
+--RECURSIVE CTE
+--generate a sequence of numbers from 1 to 20
+--WITH CTE_Series AS (
+-- anchor query
+--	SELECT 1 AS myNumber
+--	)
+--main query
+--SELECT * FROM CTE_Series
+
+WITH CTE_Series AS (
+	SELECT 1 AS myNumber
+	UNION ALL
+	--recursive query
+	SELECT myNumber+1
+	FROM CTE_Series
+	WHERE myNumber <20
+	)
+SELECT * FROM CTE_Series
+
+--show the employee hierarchy by displaying the employee's level within organization
+
+WITH CTE_Emp_Hierarchy AS 
+(
+	--anchor query (executed once)
+	SELECT EmployeeID, FirstName, LastName, ManagerID, 
+	1 AS level 
+	FROM Sales.Employees
+	WHERE ManagerID IS NULL 
+	UNION ALL
+	--recursive call (looping)
+	SELECT e.EmployeeID, e.FirstName, e.LastName, e.ManagerID,  
+	level + 1 
+	FROM Sales.Employees AS e
+	INNER JOIN CTE_Emp_Hierarchy ceh
+	ON e.ManagerID = ceh.EmployeeID
+	)
+--main query
+SELECT * 
+FROM CTE_Emp_Hierarchy
