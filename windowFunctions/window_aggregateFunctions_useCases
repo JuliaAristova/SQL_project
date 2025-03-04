@@ -1,0 +1,36 @@
+WINDOW AGGREGTE FUNCTIONS
+
+COUNT(*) - counts NULLs
+COUNT(colName) - NUlls are excluded
+
+USE CASES:
+- Overall analysis 
+- Category analysis
+- Data quality issues 
+  - identify NULLs - compare with total number of rows, 
+  - identify duplicates - Count rows partition by PK, if > 1 - not unique
+
+SUM() - numeric
+USE CASES:
+- Overall analysis 
+- Category analysis
+- Comparison analysis:
+  - compare to extremes analysis (current in compare with MIN(), MAX())
+  - compare to average analysis (current in compare with AVG())
+
+MIN(), MAX(), AVG()
+USE CASES:
+- Overall analysis 
+- Category analysis
+- Comparison analysis
+
+BUSINESS USE CASEs for Aggregate FUnctions:
+- OVERALL Analysis
+- TOTAL per GROUP Analysis
+- Part-To-Whole Analysis
+- Comparison (to extremes, average)
+- Identify duplicates
+- Outlier detection
+- RUNNING total
+- ROLLING total
+- MOVING average
