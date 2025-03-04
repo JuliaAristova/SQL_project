@@ -1,0 +1,44 @@
+--stored procedure - control flow (IF ELSE)
+ALTER PROCEDURE getCustomerSummary @Country NVARCHAR(50) = 'USA'
+AS 
+BEGIN
+	DECLARE @numCustomers INT, @avgScore FLOAT; 
+
+	--***************************
+	--Step 1: Prepare and CLeanup Data
+	--***************************
+
+	IF EXISTS (SELECT 1 FROM Sales.Customers WHERE Score IS NULL AND Country = @Country)
+		BEGIN
+			PRINT ('Updating NULL score to 0')
+			UPDATE Sales.Customers
+			SET Score = 0
+			WHERE Score IS NULL AND Country = @Country;
+		END
+	ELSE
+		BEGIN
+			PRINT ('No NULLs are found')
+		END;
+
+	--***************************
+	--Step 2: Generating report
+	--***************************
+		SELECT 
+			@numCustomers = count(*), 
+			@avgScore = AVG(Score)
+		FROM Sales.Customers
+		WHERE Country = @Country;
+
+		PRINT 'Total Customers from ' + @Country + ': ' + CAST(@numCustomers AS NVARCHAR);
+		PRINT 'Average Score from ' + @Country + ': ' + CAST(@avgScore AS NVARCHAR);
+
+		SELECT 
+			COUNT(OrderID) AS numOrders, 
+			SUM(Sales) AS totalSales
+		FROM Sales.Orders o
+		JOIN Sales.Customers c ON c.CustomerID = o.CustomerID
+		WHERE c.Country = @Country;
+	END
+
+EXEC getCustomerSummary @Country = 'Germany'
+EXEC getCustomerSummary
