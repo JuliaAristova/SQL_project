@@ -1,0 +1,22 @@
+WINDOW VALUE (ANALYTICAL) FUNCTIONS
+
+Allow access specific value from another row.
+Rules: 
+- Expression - any data type
+- ORDER BY - required
+- FRAME -  
+    - LEAD & LAG not allowed, 
+    - FIRST_VALUE  - optional (default - range between unbounded preceding and current row), 
+    - LAST_VALUE - should be used 
+
+LEAD(expr, offset, default) - access value from the next row within a window
+LAG(expr, offset, default) -  access value from the previous row within a window
+FIRST_VALUE(expr) - access a value from the first row in the window
+LAST_VALUE(expr) - access a value from the last row in the window
+
+USE CASEs:
+1. Time Series Analysis
+  - Year-over-Year (YoY) - analyze overall growth or decline business performance over time
+  - Month-over-Month (MoM) - analyze short-term trents and discover patterns in seasonality
+2. Customer Retention Analysis (ex. rank customers base on time difference between orders)
+3. Comparison Analysis - Compare to Extremes (ex., compare current value to the lowest/highest)
