@@ -1,0 +1,25 @@
+Window operations perform calcultaion (aggregation) on a specific subset of data, without loosing the level of details.
+They are more powerful and dynamic then GROUP BY. 
+They allows to perform advanced data analysis
+
+TYPES:
+- AGGREGATE functions: COUNT(), SUM(), AVG(), MIN(), MAX()
+- RANK functions: ROW_NUMBER(), RANK(), DENSE_RANK(), CUME_DIST(), PERCENT_RANK(), NTILE(_
+- VALUE (ANALITIC) funtions: LEAD(), LAG(), FIRST_VALUE(), LAST_VALUE()
+
+FUNCTION expression  OVER (PARTITION BY clause    ORDER BY clause FRAME clause) 
+
+PARTITION BY - divides the dataset into windows(partitions). If omitted - the whole dataset. You can partition by a single or combined columns
+ORDER BY - sort the data in a window. Optional for Aggregate functions, but MUST have for Rank and Valu functions
+FRAME clause - defines a subset of rows within each window that is relevant for calculation
+  Frame type:
+  - ROWS   
+  - RANGE 
+  CURRENT ROW, N PRECEEDING, N FOLLOWING, UNBOUNDED PRECEDING (first row), UNBOUNDED FOLLOWING (last row)
+  Default - BETWEEN UNBOUNCED PRECEEDING AND CURRENT ROW
+
+Rules:
+1. Window functions can be used only in SELECT and ORDER BY
+2. Nesting window functions are not allowed
+3. Window functions are executed adter WHERE clause
+3. WIndow functions can be used together with GROUP BY in the same query ONLY if the same columns are used.
