@@ -1,0 +1,60 @@
+Stored Procedure - precompiled collection of SQL statements and procedural logic that is stored
+in the database. It can accept input parameteres, process them, and return output values or result sets.
+Key features:
+- Modularity - encapsulates SQL logic for reuse
+- Performance - procompiles and optimized bt database engine
+- Security - can retrict direct table access by granting execution permissions
+- Maintainability - simplifies complex SQL operations and reduces code duplication
+
+CREATE PRICEDURE procedureName 
+AS
+  BEGIN
+    -- sql statements
+  END
+
+To modify: 
+ALTER PROCEDURE procedureName
+AS
+  BEGIN
+    -- sql statements updated
+  END
+
+  To delete: DROP PROCEDURE procedureName
+  To execute: EXEC PROCEDURE procedureName 
+
+  Procedure with parameters:
+  Parameters - placeholders used to pass values as input from the caller to the procedure
+
+CREATE PROCEDURE procedureName @parameterName datatype = <default value>
+AS
+   BEGIN
+    -- sql code 
+       WHERE example = parameterName
+   END
+EXEC procedureName @parameterName = value (without indicating default value will be used)
+
+Stored Procedure with variables
+Variables - placeholder used to store values to be used later in the procedure (temporary store and manipulate data during the execution)
+...
+BEGIN
+  DECALRE @varName INT, varName2 FLOAT    (indicate data type)
+    SELECT @varName = COUNT(*),
+           @varName2 = AVG(columnName)
+    FROM tableName
+    WHERE ...
+    PRINT 'Total ...' + CAST(@varName AS NVARCHAR);
+    PRINT 'Average...' + CAST(@vaeName2 AS NVARCHAR);
+END
+
+Store Procedure - can included cleaning data ( ex., handling NULLs before aggregation)
+Stpred Procedure can do error handiling
+BEGIN
+  BEGIN TRY
+      - SQL statements that might cause an error
+  END TRY
+  BEGIN CATCH
+      - SQL statements to handle error
+  END CATCH
+END
+
+NOTE: to improve readability use indentation, add comments, PRINT statements
