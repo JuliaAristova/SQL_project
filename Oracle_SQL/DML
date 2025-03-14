@@ -1,0 +1,8 @@
+DML - SQL statements that are used to work with data in the objects 
+(add, modify. voew and delete data)
+
+SELECT - displays data of DB table or view
+INSERT - adds data to a DB table
+UPDATE - modifies existing data from a table
+DELETE - removes existing data from a table
+MERGE - performs a combination of INSERT, UPDATE, and DELETE statements in a single statement
