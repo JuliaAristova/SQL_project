@@ -1,0 +1,26 @@
+DDL statements used to:
+
+- Create, alter, drop tables and other DB objects
+- Add comments on a particular object to be stored in the DB and associated with that object
+- Issue priviligies to users to perform various tasks in the DB
+- initiate performance analysis on objects using built-in tools
+
+CREATE object_type - creates DB object (table, view,index, synonym, etc.)
+
+ALTER  object_type - to modify an existing object (structure, name, some other attributes_
+
+DROP  object_type - removes db object from the DB
+
+RENAME - changes the name of the existing object
+
+TRUNCATE - removes all rows (data) from the existing table in the DB (fast, no possibility to recover)
+
+GRANT - provides priviligies (rights) to user objects to enable them to perform various tasks in the DB
+
+REVOKE - removes priviligies issued by GRANT
+
+FLASHBACK - restores an earlier version of a table or database
+
+PURGE - irrevocably removes database objects from the recucle bin
+
+COMMENT - adds comments to the data dictionary for an exicting DB object
