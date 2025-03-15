@@ -1,4 +1,4 @@
-DDL statements used to:
+DDL statements are subset of SQL and are used to:
 
 - Create, alter, drop tables and other DB objects
 - Add comments on a particular object to be stored in the DB and associated with that object
