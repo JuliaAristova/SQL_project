@@ -1,7 +1,8 @@
 DML - SQL statements that are used to work with data in the objects 
 (add, modify. voew and delete data)
 
-SELECT - displays data of DB table or view
+SELECT - displays data of DB table or view. It is the most commonly used SQL statement and can be used 
+          to query data from one or more tables. and simultaneously it can transform and aggegate data that it returns.
 INSERT - adds data to a DB table
 UPDATE - modifies existing data from a table
 DELETE - removes existing data from a table
