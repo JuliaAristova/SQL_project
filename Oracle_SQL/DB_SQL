@@ -3,8 +3,8 @@ It is a persistent store of information outside of the application.
 
 SQL - industry-standard language for creating and interacting with a relational database.
 
-Most languages (Java, PHP, etc) have the capabilitytoissue SQL statements to a relational database.
-There are number of tools to issue SQL statements (ex., SQL Developer)
+Most languages (Java, PHP, etc) have the capability to issue SQL statements to a relational database.
+There are number of tools to issue SQL statements (ex., SQL Developer, SQL*Plus)
 
 SQL:
 DDL (Data Definition Language):
