@@ -28,3 +28,12 @@ CONSTRAINT - a small bit of logic defined by you to instruct a particular table 
             modify. or reject incoming data.
 USERS - the 'owner' of DB objects.
 ROLES - a set of one or more priviligies that can be granted to a user.
+
+***** CREATE OBJECT *****
+
+CREATE objectType objectName attributes;
+
+Note: you cannot create a CONSTRAINT in this way
+Create PRIVATE SYNONYM or Create SYNONIM (for public)
+
+attributes - 0+ series of clauses that are unique for each individual objectTYpe.
