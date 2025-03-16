@@ -1,0 +1,17 @@
+DB consisits of one or more DB objects.
+
+Schema objects:
+Non-schema objects:
+
+Subject of the exam:
+
+TABLE  - structure that can store data. All data stored in columns and rows.Each column datarype is explicitly defined.
+INDEX - object designed to support faster search in a table.
+VIEW - a 'filter' through which you can search a table and interact with a table but that stores no data inseld and simply 
+       serves as a 'window' onto ine or more tables. It can mask a portion of the underlying table(s).
+SEQUENCE - a counter, often used to generate unique numbers as identifiers for new rows as they are added to a table.
+SYNONYM - al alias for another object in the DB, often used to specify ab alternative name for a table or view
+CONSTRAINT - a small bit of logic defined by you to instruct a particular table about how it will accept.
+            modify. or reject incoming data.
+USERS - the 'owner' of DB objects.
+ROLES - a set of one or more priviligies that can be granted to a user.
