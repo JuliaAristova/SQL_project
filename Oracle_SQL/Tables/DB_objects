@@ -1,7 +1,20 @@
 DB consisits of one or more DB objects.
 
-Schema objects:
-Non-schema objects:
+Schema is a logical collection of certain DB objects, such as tables indexes, and views, 
+all of each are owned by a user account. (Schema = user account)
+
+Categories of DB objects:
+1. Schema objects - owned bt a user account
+       - tables
+       - constraints
+       - indexes
+       - views
+       - sequencies
+       - private synonyms - owned by a uset account
+2. Non-schema objects - cannot be owned by a user account
+       - users - user account cannot be owned by itself or another account. It is a property of DB as a whole.
+       - roles - one or more priviligies that can be granted to one or more USER objects.
+       - public synonyms - available to the whole DB
 
 Subject of the exam:
 
