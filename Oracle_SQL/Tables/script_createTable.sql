@@ -1,0 +1,22 @@
+/*
+CREATE TABLE - reserved words
+tableName - follow naming convention
+columns decalration - name, datatype, columns separated by comma
+*/
+
+CREATE TABLE work_schedule (
+  work_schedule_id    NUMBER,
+  start_date          DATE,
+  end_date            DATE
+);
+
+
+***** NAMING RULES *****
+1. Length at least 1 and up to 30 characters
+2. First char - must be a letter
+3. May include letters, numbers, underscore, dollar sign
+4. Names are not case sensitive
+5. Names cannot be a reserved words
+6. These rules applies to all DB objects.
+7. Quated names (CREATE TABLE "Companies") - may begin with any charactes, contain spaces, reserved words, are case sensitive.
+   Not recommended to use. 
