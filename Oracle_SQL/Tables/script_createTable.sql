@@ -10,13 +10,21 @@ CREATE TABLE work_schedule (
   end_date            DATE
 );
 
-
-***** NAMING RULES *****
-1. Length at least 1 and up to 30 characters
-2. First char - must be a letter
-3. May include letters, numbers, underscore, dollar sign
-4. Names are not case sensitive
-5. Names cannot be a reserved words
-6. These rules applies to all DB objects.
-7. Quated names (CREATE TABLE "Companies") - may begin with any charactes, contain spaces, reserved words, are case sensitive.
-   Not recommended to use. 
+/*
+columns - 7
+constrains  - 2
+  captain_id - unnamed constraint, will be assigned system-generated name
+  primary key - unique value for each cruis_id
+default value will be used if not provided in INSERT
+*/
+CREATE TABLE cruises (
+  cruise_id           NUMBER,
+  cruise_type_id      NUMBER,
+  cruise_name         VARCHAR(20),
+  captain_id          NUMBER NOT NULL,
+  start_date          DATE,
+  end_date            DATE,
+  status              VARCHAR(5)  DEFAULT 'DOCK'
+  CONSTRAINT          PRIMARY KEY (cruise_id)
+  );
+ 
