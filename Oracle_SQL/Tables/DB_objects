@@ -3,7 +3,8 @@ DB consisits of one or more DB objects.
 Schema is a logical collection of certain DB objects, such as tables indexes, and views, 
 all of each are owned by a user account. (Schema = user account)
 
-Categories of DB objects:
+***** Categories of DB objects *****
+
 1. Schema objects - owned bt a user account
        - tables
        - constraints
@@ -37,3 +38,19 @@ Note: you cannot create a CONSTRAINT in this way
 Create PRIVATE SYNONYM or Create SYNONIM (for public)
 
 attributes - 0+ series of clauses that are unique for each individual objectTYpe.
+
+***** Namespaces *****
+
+A namespace is a logical boundary within the DB that encompasses a particular set of DB objects. 
+THere are several namespaces at work at any given time.
+You must provide unique names for an object within its own namespace.
+Ex., you can create Work_Schedule table in bothe schemas, but you cannot create table and view with the same name in the same
+schema, but you can create a constraint with the same name,
+DB - Schema 1 - Namespace (Constraints)
+                Namespace (Indexes)
+                Namespace (Tables, Views, Sequences, Private Synonyms, User-Defined Types)
+                Namespace (Users, Roles)
+   - Schema 2 - Namespace (Constraints)
+                Namespace (Indexes)
+                Namespace (Tables, Views, Sequences, Private Synonyms, User-Defined Types)
+                Namespace (Public Synonymes)
