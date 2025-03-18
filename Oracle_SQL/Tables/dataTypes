@@ -1,0 +1,54 @@
+Each columns must be assigned a data type.
+  
+Categories (built-in):
+- numeric
+- character 
+- date
+- LOB - large object - can include charager data, but cannot be included in a primary key,
+        DISTINCT, GROUP BY, ORDER BY, or joins
+
+It is possiblle for users to create their own unique "user-defined" data types. (CREATE TYPE)
+  ***** NUMERIC TYPE *****
+
+  NUMBER(n,m) - 0, negative, positive. n, m - optional. n range 1 - 38, m range -84 - 127
+          n - precision (max numbers of digits before and after decimal point,
+          m - maximun number of digits after decimal point
+          if n is specified, m is omited - m defaults to  0
+          when n is specified and greated number is inserted -- error
+          m - is rounded uo (-m - specifies how many significant digits to the left of the decimal point will be punded off)
+  
+  *** CHARACTER TYPE *****
+          
+  CHAR(n) - fixed length alphanumeric value (max n, optional). 
+            If value < n - spaces are added, if > n - error. Default max = 2000
+  VARCHAR2(n) - 'variable character', fixed lengt alphanumeric value (max n, must be specified, 1 char upto 4000 bytes). 
+            Does not add blanks to values.
+
+***** DATE *****
+
+DATE  - accepts date and time information. Fields include year, month, date, hour, minute, and second.
+      NLS_DATE_FORMAT - default Oracle date format (DD-MON-RR, ex 01-APR-25)
+TIMESTAMP(n) - extension to DATE (adds fractional second precision). n range 0-9, if omitted - 6
+TIMESTAMP(n) WITH TIME ZONE - variation of TIMESTAMP (adds time zone region name or an offset for time zone)
+                         n range 0-9, if omitted - 6
+                      
+TIMESTAMP(n) WITH LOCAL TIME ZONE - variation of TIMESTAMP. Offset(n) is not stored, it is calculated automatically
+                         when value is accessed from a different time sone. (if omitted n = 6)
+INTERVAL YEAR(n) TO MONTH - stores a span of time defined in inly year and month values. 
+                         n - number of digits used to define the YEAR value.
+                         n range 0-9, if omitted - 2
+INTERVAL DAY(n1) TO SECOND(n2)- stores a span of time defined in days, hours, minutes, and seconds. 
+                         n1 - precisions for days (n range 0-9, if omitted - 2)
+                         n2 - precision for seconds (n range 0-9, if omitted - 6)
+
+***** LARGE OBJECTS *****
+
+BLOB - 'binary large object' (image, video files, starting size 4 GB)
+CLOB - 'character large object' (accepts text data elements)
+NCLOB - accepts CLOB data in Unicode
+
+Note: Oracle corporation discourages to use LONG and encourages to convert LONG data types to LOB data types.
+
+
+
+                         
