@@ -1,0 +1,57 @@
+***** TYPES of CONSTRAINTS *****
+
+----- NOT NULL -----
+
+NULL - 'absence of information', 'unknown'
+Columns with NOT NULL constraint must always be provided wit a value.
+By default, columns are allowed NULL values.
+If PRIMARY KEY constraint is added, no need to add NOT NULL constraint.
+
+----- UNIQUE -----
+
+Ensured that any data added to the column in the future will be unique when compared to data already existing in the column.
+- Can be applied to one columnd
+- Can be applied to multiple columns (composite UNIQUE constraint) - requires combination of the column to be uniqie,
+  each individual column may repeat data.
+- Allows NULL values to be added to the column.
+
+----- PRIMARY KEY -----
+Defines one or more columns as unique identifier for each row of data that is added to the table.
+It is combination on UNIQUE and NOT NULL.
+Table can have only one PK.
+Composite PK constraint requires the combination of column values collectively have to be unique, and all column have values.
+
+CREATE TABLE helpDesk (
+  HD_category     VARCHAR2(8),
+  HD_year         NUMBER,
+  HD_ticket       NUMBER,
+  HD_title        VARCHAR(30),
+  CONSTRAINT      helpdesk_pk PRIMARY KEY(HD_category, HD_year, HD_ticket
+);
+
+----- FOREIGN KEY -----
+Applies to one or more columns in a particular table and works in conjunction with a referred table's PK.
+(Referential integrity PK of parent table and FK of child table)
+  
+- Identifies 1+ column(s) in a 'child' table
+- For each of these columns identifues 1+ corresponding columns in 'parent' table
+- Ensures that the parent table has PL or UNIQUE constraint on those corresponding columns
+- Ensures that any future values added to the FK-constrained columns of the child table are already stored in parent table.
+
+CREATE TABLE ports(
+  port_id    NUMBER,
+  port_name  VARCHAR2(20),
+  country    VARCHAR2(40),
+  capacity   NUMBER,
+  CONSTRAINT port_pk PRIMARY KRY (port_id)  #if not specified as PK or UNIQUE --> ships will result in error
+);
+CREATE TABLE ships(
+  ship_id    NUMBER,
+  ship_name   VARCHAR(20),
+  home_port_id  NUMBER,      # NOT NULL can be added if required
+  CONSTRAINT ships_port_pk FOREIGN KEY(home_port_id) REFERENCES ports(port_id)
+
+NOTE: often it is easier to add FK constraints with ALTER TABLE when all the tables are created.
+You cannot add FK during CTAS - Create Table As Select)
+);
+  
