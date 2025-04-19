@@ -1,0 +1,25 @@
+SET Operators - combunes 2+ separate SELECT statements so that their output is merged in some manners
+
+UNION - combnes row sets. Eliminates duplicate row sets
+UNION ALL - combunes row sets. Does not eliminate duplicaate row sets
+INTERSECT - insludes only those row sets that are present in both queries
+MINUS - subtracts the rows in the second row set from the rows in the first row set.
+
+Rules:
+- number of espression in each SELECT must be the same
+- data type of eash expression must match (identicak or can be made to be indentical through automation conversion)
+- large data types (BLOB, CLOB) cannot be used 
+- ORDER BY can be included only in the last SELECT statement
+
+SELECT email_addresss
+FROM contact_email
+UNION
+SELECT email
+FROM online_subscribers
+
+
+SELECT email_addresss
+FROM contact_email
+UNION ALL
+SELECT email
+FROM online_subscribers
