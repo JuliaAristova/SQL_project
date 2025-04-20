@@ -1,25 +1,46 @@
 SET Operators - combunes 2+ separate SELECT statements so that their output is merged in some manners
+The Set operators are useful for requirements to combine the data of two tables into one output result set 
+when the two tables have no primary key/foreign key relationship with each other.
 
-UNION - combnes row sets. Eliminates duplicate row sets
-UNION ALL - combunes row sets. Does not eliminate duplicaate row sets
-INTERSECT - insludes only those row sets that are present in both queries
+
+UNION - combines row sets. Eliminates duplicate row sets
+UNION ALL - comb=ines row sets. Does not eliminate duplicate row sets
+INTERSECT - includes only those row sets that are present in both queries
 MINUS - subtracts the rows in the second row set from the rows in the first row set.
 
 Rules:
 - number of espression in each SELECT must be the same
 - data type of eash expression must match (identicak or can be made to be indentical through automation conversion)
 - large data types (BLOB, CLOB) cannot be used 
-- ORDER BY can be included only in the last SELECT statement
+- ORDER BY can be included only in the last SELECT statement (without ORDER there is no guarantee the ordering of rows in any Select statements)
+- name of the headings in result is taken from the first Select statement
+- set operators can be combined together (use parenthersis, check usage of ORDER to avoid errors)
+  -  
 
+#returns combination of the original rows wit any duplicate values removed
 SELECT email_addresss
 FROM contact_email
 UNION
 SELECT email
 FROM online_subscribers
 
-
+#returns combination of the original rows  with duplicate values included
 SELECT email_addresss
 FROM contact_email
 UNION ALL
+SELECT email
+FROM online_subscribers
+
+#returns the common values of amonng  the rows of the Select statement, duplicates removed if present
+SELECT email_addresss
+FROM contact_email
+INTERSECT
+SELECT email
+FROM online_subscribers
+
+#returns the row that are unique in the first Select statement 
+SELECT email_addresss
+FROM contact_email
+MINUS
 SELECT email
 FROM online_subscribers
