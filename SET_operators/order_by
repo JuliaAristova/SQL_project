@@ -21,10 +21,12 @@ ORDER BY 2;                      # ordering by concatinated name
 
 ***** ORDER BY - by reference *****
 
+When using ORDER BY reference, the column name in force is whatever column name exists in the firs SELECT statement.
+
 SELECT 'Individual' AS contact_category, 
 last_name || ', ' || 'first_name' AS point_of_contact     
 FROM cruise_customers
 UNION
 SELECT category, vendor_name
 FROM vendors
-ORDER BY point_of_cintact          #alias from first Select
+ORDER BY point_of_contact          #alias from first Select 
