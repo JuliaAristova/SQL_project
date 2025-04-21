@@ -1,0 +1,8 @@
+DUAL table is present in every Oracle database.
+It is contain only one column - DUMMY, datatype - VARCHAR2(1).
+It contains only one row - value in DUMMY of 'X'
+
+Purpose of DUAL - to run a SELECT statement to get some other task acomplished, such as obtaining the output of a function.
+
+  Example: Oracle function SYSDATE - displaying current date according to the OSof the server on which Oracle DB is installed
+  SELECT SYSDATE FROM DUAL;
