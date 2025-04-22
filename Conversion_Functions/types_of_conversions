@@ -1,0 +1,24 @@
+Purpose - to convert data values from one data type to another.
+Do not change values, but type.
+
+***** IMPLICIT VONCERSION *****
+Occurs automatically where SQL will determine on its own that a data type conversion is required byt not specified.
+
+SELECT 'Chapter ' || 1 || '....I am born.' FROM DUAL;   # 1 - numeric value - character conversion appens automatically
+
+SELECT SYSDATE,
+       ADD_MONTH(SUBSTR('plus 3 months', 6, 1) AS plus_three     # SUBSTR --> 3 - string, automatically converted to numeric
+FROM DUAL;
+
+Oracle recommends to use explicit conversion where possible.
+
+Rules for automatic data type conversion:
+- numeric values will generally not convert automatically to dates
+- numeric and text data will generally not convert automatically to very large sized types (LOB, CLOB, RAW, and others)
+- very large types will generally not automatically convert to each other, such as fffrom BLOB to CLOB (some will, but not many)
+
+***** EXPLICIT VONCERSION *****
+
+- Easy to read
+- Better performance
+- Recommended to use
