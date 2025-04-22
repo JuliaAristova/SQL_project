@@ -22,3 +22,7 @@ Rules for automatic data type conversion:
 - Easy to read
 - Better performance
 - Recommended to use
+
+TO_CHAR
+TO_NUMBER
+TO_DATE
