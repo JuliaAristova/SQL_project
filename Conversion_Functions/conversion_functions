@@ -1,0 +1,49 @@
+***** Additional Conversion Functions *****
+
+*** TO_TIMESTAMP(c, format_model, nld_parms)
+    c - character data type, required
+    format_model - optional. Must define the format of c corresponding to TIMESTAMP format model elements.
+    Converts c data to the TIMESTAMP data type (includes fractional seconds)
+
+  SELECT TO_TIMESTAMP('2020-JAN-01 13:34:00:093423', 'RRRR-MON-DD HH24:MI:SS:FF') event_time FROM DUAL; # 01-JAN-20 01:34:00.093423000 PM
+
+*** TO_TIMESTAMP_TZ(c, format_model, nld_parms)
+    c - character data type, required
+    format_model - optional. Must define the format of c corresponding to TIMESTAMP WITH TIME ZONE format model elements.
+    Transforms c into a value TIMESTAMP WITH TIME ZONE
+
+  SELECT TO_TIMESTAMP_TZ('17-04-2016 16:45:30', 'DD-MM-RRRR HH24:MI:SS') 'TIME' FROM DUAL; # 17-APR-16 04:45:30.000000000 PM AMERICA/NEW_YORK
+
+*** TO_YMINTERVAL('y-m')
+    y, m - numbers contained within a string, required
+    Transforms y and m into the years and months in a format of the data type INTERVAL YEAR TO MONTHS
+
+  SELECT TO_YMINTERVAL('04-06') event_time FROM DUAL; # 4-6
+
+  *** TO_DSINTERVAL(sql_format, nls_parms)
+    sql_format - character string in the format required for the INTERVAL DAY TO SECOND data type ('DAYS HH24"MI:SS.FF') 
+   
+  SELECT TO_DSINTERVAL('40 08:30:00.03225') event_time FROM DUAL; # 40 8:30:0.032250000
+
+  *** NUMTOYMINTERVAL(n, interval_unit)
+    n - number, required
+    interval_unit - 'YEAR' or 'MONTH'
+    Converts date informationin numeric form into an interval value of time.
+   
+  SELECT NUMTOYMINTERVAL(27, 'MONTH') FROM DUAL; # 2 - 3
+
+  *** NUMTODSINTERVAL(n, interval_unit)
+    n - number, required
+    interval_unit - 'DAY', 'HOUR', 'MINUTE', or 'SECOND'
+    Converts date informationin in numeric form into an interval value of time.
+   
+  SELECT NUMTODSINTERVAL(36, 'HOUR') FROM DUAL; # 1 12:0:0.0
+
+*** CAST(e AS d)
+  e - expression, d - data type
+  Converts e to d (Usefuk for converting test representations of datetime information into datetime formats, particularly TIMESTAMP WITH LOCAL TIME ZONE)
+
+  SELECT CAST('19-JAN-16 11:35:30' AS TIMESTAMP WITH LOCAL TIME ZONE') 'Converted LTZ' FROM DUAL;  # 19-JAN-16 11.35.30.000000000 AM
+
+  
+  
