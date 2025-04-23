@@ -1,0 +1,26 @@
+***** TO_CHAR - Number ******
+
+TO_CHAR(n, format_model, nls_param)
+  n - number, required
+  format_model - consists of 1+ format elements, optional
+  nls_parms 
+  Transforms n into a character string, using the optional format model
+
+SELECT TO_CHAR (198, '$999.99') FROM DUAL;    # $ 198.00
+
+***** TO_CHAR - Date ******
+
+TO_CHAR(в, format_model, nls_param)
+  d - date or date interval, required
+  format_model - variety of ways, optional 
+  nls_parms 
+
+  Example format mode:
+  D     - day of week (1-7)
+  DAY   - daye of the week spelled out
+  DD    - day of the month (1-31)
+  DDD   - day of the year (1-366)
+  DL    - long day format (US --> "Saturday, July 27, 2019")
+  DS    - short day format (US --> "7/27/2019")
+
+SELECT TO_CHAR(SYSDATE, 'DAY, "THE" DD "OF" MONTH, RRRR) FROM DUAL;  # WEDNESDAY , THE 17 OF FEBRUARY , 2016
