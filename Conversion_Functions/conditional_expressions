@@ -1,0 +1,61 @@
+SQL does not have IF statement.
+Conditional expressions:
+- CASE
+- DECODE
+- NVL
+- NULLIF
+
+***** CASE *****
+  
+CASE statement - evaluates an expression and, based on its value, evaluates one of a series of expressions as specified in the CASE statement.
+
+SELECT 
+  CASE 'option1'
+    WHEN 'option1' THEN 'found it'
+    WHEN 'option2' THEN 'did not find it'
+  END AS 'ANSWER'
+FROM DUAL;
+
+***** DECODE *****
+
+DECODE(e, search_expression, d)
+  e, d - required;
+  search_expression - optional (se1, se2)
+  If e is equal to se1 , then DECODE should return se2
+  Otherwise it should return d (if d is omitted - return NULL)
+  Note: in DECODE NULL compared to NULL returns True
+
+Output:
+  if e and first occurence of se1 are character --> VARCHAR2
+  if numeric --> numeric
+
+  SELECT STATE,
+    DECODE(STATE('CA', 'California',
+                  'IL', 'Illinois',
+                  'Other') AS decoded_state
+ FROM ADDRESSES;
+
+***** NVL *****
+
+NVL(e1, e2)
+  e1, e2 - expressions, required, same data type, automatic data type convertion applies here (so , can be different data type but be able to converted)
+  if eq is NULL --> NVL returns the value for e2, otherwise it returns e1
+  You can use NVL to substitute something meaningful in the plae of NULL (such as a zero) to satisfy the outer function
+
+  SELECT sq_ft + NVL(balcony_sq_ft) FROM ship_cabins;   # adds area of balcony to area of cabin - to avoid NULL if balcony area is not defined
+
+***** NULLIF *****
+
+NULLIF(e`, e2) 
+  e1, e2 - expressions, required, same data type 
+  if e1 and e2 are the same, NULLIF returns NULL; otherwise it returns e1
+  Good for comparing multiple rows wherein an older and mewer version of a particular value exist
+
+  SELECT test_score,
+         updated_tet_score,
+         NULLIF(updated_test_score, score) revision_only
+  FROM scores;
+
+
+  
+
