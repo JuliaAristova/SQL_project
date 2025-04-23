@@ -1,0 +1,12 @@
+TO_DATE(c, format_model, nls_params)
+  c - character string, required
+  format_model - format model (same as TO_CHAR, TO_NUMBER)
+  nls_param - same as TO_CHAR, TO_NUMBER
+  Transforms the value contained within c into a valid DATE data type by structuring format_model to describe hor the character string is formed,
+  identifying the date information accordingly.
+
+SELECT TO_DATE('2016-01-31', 'RRRR-MM-DD') FROM DUAL;    # 31-JAN-16
+
+Note: it is common to nest conversion finctions for various reasons.
+For example. to deermint the weekday of a particular date, you can nest TO_DATE within TO_CHAR
+SELECT TO_CHAR(TO_DATE('04-JUL-1776'), 'Day') FROM DUAL;
