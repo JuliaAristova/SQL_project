@@ -1,0 +1,31 @@
+TO_NUMBER(e1, format_model, nls_parms)
+
+e1 - expression, required
+format_model - optional
+nls_parms - optional, allows to identify any of the three NLS parameters
+
+***** FORMAT MODEL *****
+, .  commas and decimal points will pass through wherever they are included (9,999.99
+$    leading dollar sign ($999.99)
+0    leadin or trailing 0 (0099.99)
+9    any digit (999(
+B    leading blank for integer (B999)
+C    ISO currency symbol as defined in the NLS_ISO_CURRENCY parameter
+D    returns the current decimal character as defined by NLS_ISO_CURRENCY parameter (default - period) (999D99)
+G    returns the group separator (e.g., comma) (9G999)
+L    returns the local currency symbol (L999)
+others
+
+***** NLS PARAMETER *****
+NLS_NUMERIC_CHARACTERS = 'dg'     d - decimal character --> D; g - group separator --> G
+NLS_CURRENCY = 'text'             text = local currency symbol --> L
+NLS_ISO_CURRENCY = 'currency'     currency = international currency symbol --> C
+
+SELECT TO_NUMBER('$17,000.23', '$999,999.99') FROM DUAL;    #  17000.23
+
+SELECT TO_NUMBER('17,000.23', 
+                 '999G999D99',
+                 'nls_numeric_characters='',.'' ') 
+FROM DUAL;                                                 #  17000.23
+
+
