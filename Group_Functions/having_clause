@@ -1,0 +1,13 @@
+HAVING clause can exclude specific groups of rows defined in the GROUP BY clause.
+It is unique to the SELECT statement (does not exisr in othe SQL statements).
+Defines the criteria upon which each of the GROUP BY groups will be either included or excluded.
+
+HAVING can only compare expressions that reference groups as defined in the GROUP BY clause and aggregate functions.
+
+SELECT room_style,
+       room_type,
+       TO_CHAR(MIN(sq_ft), '9,999') "MIN"
+FROM ship_cabins
+WHERE ship_id = 1
+GROUP_BY room_style, room_type
+HAVING room_type IN ('Standard', 'Large') OR MIN(sq_ft_ > 1200
