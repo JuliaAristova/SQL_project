@@ -1,0 +1,31 @@
+GROUP BY CLAUSE 
+
+- Optional clauses in SELECT
+- Identifies subsets of rows within the larger set of rows being considered by the SELECT statement
+
+SELECT room_style, 
+       ROUND(AVG(sq_ft), 2)    # we can include multiple aggregate functions
+FROM ship_cabins
+WHERE ship_id = 1
+GROUP BY room_style
+
+Rules:
+- GROUP BU can specify any number of valid expressions (multiple columns)
+- Generally is used to specify columns in the table that will contain common data om prder to group rows together for performing
+  some sort of aggregate function on the set of rows.
+- select list of SELECT can includes only expressions specified in GROUP BY and aggregate functions applied to those expressions.
+- expressions that are specified in GROUP BY do not have to be included in SELECT statement's select list
+- ORDER BY is limited, if used - can use expressions specified in GROUP BY, 
+                               - can be done by name, order or aliases in SELECT
+                               - can be done by aggregate function
+                               - by functions USER, SYSDATE, and UID
+
+SELECT room_style, 
+       room_type,
+       ROUND(AVG(sq_ft), 2),
+       TO_CHAR(MIN(sq_ft), '9,999') 'MIN',
+       TO_CHAR(MAX(sq_ft), '9,999') 'MAX',
+FROM ship_cabins
+WHERE ship_id = 1
+GROUP BY room_style, room_type
+ORDER BY 4
