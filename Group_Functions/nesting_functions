@@ -1,0 +1,14 @@
+Scalar functions  - return one value for each row encountered by the SQL statement in which the scalar function is applied.
+Aggregate functions - return one value for every zero or more rows encountered by the SQL statement.
+
+Scalar functions can be nested multiple times, as long as the data types match (same level of details).
+Aggregate functions - aggregates combine data from multiple rows into a single row (different level of details)
+
+SELECT ROUND(AVG(MAX(sq_ft)))
+FROM ship_cabins
+WHERE ship_id = 1
+GROUP BY room_style, room_type      #  771
+
+- You are allowed to nest aggregate functions up to two levels deep
+- Each time you introduce an aggregate function, you are rolling up lower-level data into higher-level summary data
+- Your SELECT statement's select list must always respect the level of aggregation and can only include expressions that are all at the same level of aggregation.
