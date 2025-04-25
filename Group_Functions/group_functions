@@ -1,0 +1,66 @@
+Group functions - have the ability to process zero or more rows as a logical set, analyszed together to return a single-row result.
+
+Input - zero or more rows
+Output - one row
+
+Types:
+- Aggregate (multirow) functions 
+- Analytical functions 
+
+Aggregate functions - typically used with SELECT statement that selects many rowa
+Analytic functions - consider a set of rows and process them as a single set or as varying subsets, including overlapping subsets.
+
+Group functions can be called from:
+1. SELECT list
+2. ORDER BY clause
+3. GROUP BY clause
+4. HAVING claise
+
+***** COUNT *****
+COUNT(e1) - e1 - expression, any data type - determines the number of occurence of non-NULL values
+
+COUNT(*) - counts the number of rows in the entire table
+
+SELECT COUNT(*) FROM vendors;      # 2
+
+SELECT COUNT(vendor_name),         # 2
+       COUNT(status),              # 1
+       COUNT(category)             # 0
+FROM vendors;
+
+SELECT COUNT(ALL last_name),              # ALL - default operator
+       COUNT(DISTINCT last_name)          # DISTINCT operator returns unique values
+FROM employees;
+
+***** SUM *****
+SUM(e1) - e1 - expression, numeric data type 
+
+SELECT SUM(subtotal) FROM orders;
+SELECT SUM(subtotal) FROM orders
+WHERE TO_CHAR(order_date, 'MON_RR') = 'APR-17'
+
+***** MIN and MAX *****
+MIN(e1), MAX(e1) - e1 - expression, data types - character, date, number; return single min/max value
+  date - earlier dates ar MIN
+  character - A < Z, Z < a, '1' < '10', '100' < '2'
+
+***** AVG *****
+AG(e1) - e1 - expression, numeric data type; ignores NULL values
+
+ SELECT TO_CHAR( ROUND (AVG(salary), 2), '$9999,999.99') FROM pay_history;   # nested aggregate functions with 2 scalar functions
+
+When nested - the aggregate function should be innermost function.
+
+***** MEDIAN *****
+MEDIAN(e1) - e1 - expression, numeric data type; ignores NULL values
+Sort the values, returns number in the middle (odd) or linear interpolation between 2 values in the middle (even)
+
+***** RANK *****
+
+RANK: Analytic
+
+
+
+
+
+
