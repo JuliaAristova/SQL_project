@@ -59,8 +59,44 @@ Sort the values, returns number in the middle (odd) or linear interpolation betw
 
 RANK: Analytic
 
+RANK() OVER( PARTITION BY p1 ORDER BY ob1) - calculates the rank of a value within a group of values.
+       (If there are 3 rows tired for first. they all will be ranked 1, 1, and 1, and the next row will be ranked 4).
+       p1 - partition; optional
+       ob1 - expression
 
+RANK: Aggregate
 
+RANK(c1) WITHIN GROUP (ORDER BY e1)
+       c1, e1 - expressions (for each c you have corresponding e, data types must match)
+       RANK(c1, c2, c3) WITHIN GROUP (ORDER BY e1, e2, e3)
 
+***** DENSE_RANK *****
 
+Assign the same number to each equivalent value and resumes counting after i tie (no gaps)
 
+DENSE_RANK: Analytic
+
+DENSE_RANK() OVER( PARTITION BY p1 ORDER BY ob1)
+        c1, e1 - expressions (for each c you have corresponding e, data types must match)
+       (If there are 3 rows tired for first. they all will be ranked 1, 1, and 1, and the next row will be ranked 2).
+
+DENSERANK: Aggregate
+
+RANK(c1) WITHIN GROUP (ORDER BY e1)
+       c1, e1 - expressions (for each c you have corresponding e, data types must match)
+       DENSE_RANK(c1, c2, c3) WITHIN GROUP (ORDER BY e1, e2, e3)
+
+***** FIRST, LAST *****
+
+Both aggregate and analytical functions
+
+aggregate_function KEEP (DENSE_RANK FIRST ORDER BY e1)
+aggregate _function KEEP(DENSE_RANK LAST ORDER BY e1)
+
+SELECT MAX(sq_ft) KEEP(DENSE_RANK FIRST ORDER BY guests) 'Largest' 
+FROM ship_cabins
+Display the highest number of sq_ft for any and all cabins that accomodate the lowest number of guests according to the guest column
+
+- sort rows by guests --> ORdeR BY guests
+- identifying the lowest of guests --> FIRST
+- for all rows with a guest vakues that matched the lowest value we determine the MAX sq_ft
