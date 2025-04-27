@@ -1,0 +1,18 @@
+Create user:
+  CREATE USER username IDENTIFIED BY password;
+  ex., CREATE USER JOAN UDENTIFIED BY DEMERY;
+
+Alter user:
+  ALTER USER JOAN IDENTIFIED BY HAQAII;      # changes password
+
+Remove user:
+  DROP USER username;
+Note: if a user account owns any DB objects, statement won't work --> DROP USER username CASCADE; (removes user and all objects ot owns).
+
+After creating a user, it should be granted at least the mimimum system priviliges to log in
+
+SQL*Plus
+  CONNECT - to log in  CONNECT JOAN/HAWAII;
+
+Tablespaces - controlled by DBA administrator
+  GRANT UNLIMITED TABLESPACES TO username;
