@@ -14,8 +14,30 @@
 ***** GRANT *****
 GRANT privilege1 (, privilege2, privilege3...)  TO user options;  # privilege(s)  - separated by comma
 
+--- options ---
+GRANT privilege TO user WITH ADMIN OPTION;   # user has right to grant the system privilegento another user
+
 ***** REVOKE *****
 REVOKE privilege1 (, privilege2, privilege3...)  FROM user; 
 
 Note: If a user created tables, then his privilege to create table was revoked, tha tables already creater remain in place/ 
+
+***** ALL PRIVILIGES *****
+If you want to grant all privileges.
+SYSTEM and some other DBA qualified accounts can:
+
+GRANT ALL PRIVILEGES TO user;          # granting all System privileges to user
+GRANT ALL PRIVILEGES TO user WITH ADMIN OPTION;
+
+REVOKE ALL PRIVILEGES FROM user;       # will work only if ALL privileges were granted 
+
+***** PUBLIC *****
+If you want to grant certain privileges to all users.
+Public account is a built-in user account in the Oracle DB that represents all users.
+
+GRANT CREATE ANY TABLE TO PUBLIC;  # every user in DB can create any table in any other user account
+
+ROVOKE CREATE ANY TABLE FROM PUBLIC;
+
+
 
