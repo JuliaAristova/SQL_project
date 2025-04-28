@@ -1,0 +1,31 @@
+A ROLE is a DB object that you can create and to which you can assign system and/or object privileges.
+You can also assign other roles to a given role.
+Changes to roles cascade to the users to whom the role is granted.
+- Role can be granted to as many user accounts as you want.
+- User account may be granted multiple roles at once.
+- Role can be granted to another role.
+- Role can be granted WITH ADMIN OPTION.
+- Role exist in a namespace that resides outside of any user account.
+
+3 roles of standard Oracle DB:
+- CONNECT  - CREATE SESSION system privilege  (typical generic end user)
+- RESOURCE - collection of system priveleges intendd for the typical application developer
+- DBA - intended to typical DB administrator
+classic 
+Oracle - Create your own set of roles as required.
+
+***** GRANT ROLE to a USER *****
+
+CREATE ROLE Cruise_Analyst;
+GRANT SELECT ON ships TO Cruise_Analyst;
+GRANT SELECT ON ports TO Cruise_Analyst;
+GRANT SELECT ON employees TO Cruise_Analyst;
+
+CREATE ROLE Cruise_Operator;
+GRANT SELECT, UPDATE, INSERT, DELETE ON ships TO Cruise_Operator;
+GRANT SELECT, UPDATE, INSERT, DELETE ON ports TO Cruise_Operator;
+GRANT SELECT, UPDATE ON employees TO Cruise_Operator;
+
+GRANT CRUISE_OPERATOR TO Lisa;
+GRANT CRUISE_OPERATOR TO Lisa WITH ADMIN OPTION;
+GRANT CRUISE_Analyst TO Henry;
