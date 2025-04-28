@@ -1,15 +1,23 @@
 ***** CATEGORIES of PRIVILIGES *****
 
-- System privileges - the ability to perform  particulat task in the DB (required to perform a task in the DB)
+- System privileges - the ability to perform  particulat task in the DB using DDL, DML. or DCL (required to perform a task in the DB)
 - Object privileges - the ability to perform a particular task on a particular DB object (required to use system privileges on any given DB object)
-- Role - a collection on one or more system privileges and/or object privileges and/or other roles
+
+- Role - a collection on one or more system privileges and/or object privileges and/or other roles. Exist independently of the privileges it may or may not contain.
 
 Privileges can be granted to:
 - user account
-- role  ( Role can be granted to user account)
+- role  ( Role can be granted to a user account)
 
 Privileges and roles can later be revoked.
 Privileges and Roles - mechanism for managing and controlling access to the DB by user accounts.
+
+Note: 
+User account ig granted a privilege directly.
+Then the user account is granted a role that contains the same privelege.
+If the role then revoked, the user account still have the privilege that was granted directly.
+
+
 
 ***** DATA about PRIVILIGES in the DATA DICTIONARY *****
 USER_SYS_PRIVS      System privileges granted to current user
