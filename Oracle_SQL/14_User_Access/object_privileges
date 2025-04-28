@@ -1,3 +1,7 @@
+OBJECT privilege - right to perform tasks on a particular object in the DB.
+A user account, by default, has object privileges on the objects it owns.
+Object privileges are required to perform tasks on objects a user account does not own.
+
 Any user who owns a table (or any other DB object) may grant object privileges on their DB object to other user in the DB.
 
 Object privileges exist for all DML statements: SELECT. INSERT, UPDATE, and DELETE, and DDL statements relevant to an existing object (ex., ALTER).
