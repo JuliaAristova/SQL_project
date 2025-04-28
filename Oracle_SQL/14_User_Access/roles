@@ -23,6 +23,16 @@ GRANT SELECT ON employees TO Cruise_Analyst;
 
 CREATE ROLE Cruise_Operator;
 GRANT SELECT, UPDATE, INSERT, DELETE ON ships TO Cruise_Operator;
+
+***** DATA DICTIONARY VIEWs of ROLE objects *****
+DBA_ROLES          all roles that exist in the DB
+DBA_ROLE_PRIVS     Roles granted to users and roles
+DBA_SYS_PRIVS      System privileges granted to users and roles
+DBA_TAB_PRIVS      All grants on objects to users and roles
+ROLE_ROLE_PRIVS    Roles that are granted to roles
+ROLE_SYS_PRIVS     System priveleges granted to rikes
+ROLE_TAB_PRIVS     Table privileges granted to roles
+SESSION_ROLES      Roles that are enabled to the user
 GRANT SELECT, UPDATE, INSERT, DELETE ON ports TO Cruise_Operator;
 GRANT SELECT, UPDATE ON employees TO Cruise_Operator;
 
