@@ -1,0 +1,60 @@
+Any user who owns a table (or any other DB object) may grant object privileges on their DB object to other user in the DB.
+
+Object privileges exist for all DML statements: SELECT. INSERT, UPDATE, and DELETE, and DDL statements relevant to an existing object (ex., ALTER).
+
+GRANT SELECT, UPDATE Webinars TO Henry;
+
+CONNECT Henry / pass;
+SELECT * FROM Lisa.Webinars;      # Lisa schema prefix must be used
+
+INSERT INTO Liza.Webinars values('New Entry');  # error message - no right to Insert - Insufficient privileges
+
+***** SCHEMA PREFIX *****
+
+SYNONYM - is an object in the DB that is an alternative name for a DB object.
+PUBLIC SYNONYM - is a synonym that is owned by the PUBLIC user account, which is automatically created user account that is maintained by the Oracle DB.
+PUBLIC is a mechanism by which you can create globally owned objects (anything that is owned by PUBLIC is automatically owned by all users in the DB).
+
+GRANT CREATE PUBLIC SYNONYM TO Lisa;
+Lisa:  CREATE PUBLIC SYNONYM Webinars FOR Lisa.Webinars;
+Henty: SELECT * FROM Webinars;        # Webinars - PUBLIC SYNONYM which points to Lisa.Webinars
+
+***** WITH GRANT OPTION *****
+
+CONNECT Lisa/Poe;
+GRANT SELECT, UPDATE ON Webinars TO Henry WITH GRANT OPTION;
+
+Henry can Seletc, Update, and GRANT these privileges to other users.
+
+CONNECT Henry/RussFuss;
+GRANT SELECT ON Lisa.Webinars TO Harold WITH GRANT OPTION;
+
+***** REVOKE *****
+Revokes all specified priveleges and cascades the change throughout all user accounts as required.
+
+REVOKE SELECT, UPDATE ON Webinars FROM Henry;
+
+Revocation of object privileges 'cascades" --> Henry and Harold will lose given priveleges.
+
+
+***** ALL PRIVELEGES *****
+Works with granting and revoking object priveleges.
+
+GRANT ALL PRIVILEGES on Webinars TO Henry;  # grants all priveleges except for the ability to grant privileges
+
+GRANT ALL PRIVILEGES ON Webinars TO Henry WITH GRANT OPTION;   # PRIVILEGES can be imitted
+GRANT ALL ON Webinars TO Henry;
+
+REVOKE ALL PRIVELEGES ON Webinars FROM Henry;
+REVOKE ALL ON Webinars FROM Henry;          #executed without errors even if there are no priveleges granted to user
+
+***** DEPENDENT PRIVELEGES *****
+
+User A - owned table A and view A based on table A, public synonym of table A
+User A grants User B on view A (no need to grant User B on table A)
+User B can see public synonym on table A, but needs privilege to see the table A
+
+Note:
+If you grant privilege to table and then drop the table --> privileges are dropped with the table too.
+If the table is recreated, privileges must be granted again.
+If you restore table with the FLASHBACK TABLE ... BEFORE DROP statement --> you will recover the table, its associated indeces, and tha table's granted priveleges. 
