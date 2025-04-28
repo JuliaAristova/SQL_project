@@ -1,0 +1,39 @@
+***** SYSTEM PRIVILEGES *****
+System privileges are the right to perform some task in the DB (more than 100 different system privileges that can be granted to a user account).
+Ex., 
+CREATE SESSION
+CREATE TABLE
+CREATE ANY TABLE
+CREATE VIEW
+CREATE USER
+ALTER USER
+DROP USER....
+
+***** ANY *****
+Some System privileges include the keyword ANY
+
+CREATE ANY TABLE - user can create any table in any user account
+
+CREATE USER LAUREL IDENTIFIED BY POKE;
+GRANT CREATE SESSION TO LAUREL;
+GRANT UNLIMITED TABLESPACE TO LAUREL;
+GRANT CREATE TABLE TO LAUREL;
+
+CREATE USER HARDY IDENTIFIED BY CLOBBER;
+GRANT CREATE SESSION TO HARDY;
+GRANT UNLIMITED TABLESPACE TO HARDY;
+GRANT CREATE ANY TABLE TO HARDY;
+
+CONNECT LAUREL / POKE;
+CREATE TABLE MOVIES(movie_id  NUMBER(7));
+
+CONNECT HARDY / CLOBBER;
+CREATE TABLE LAUREL.TVSHOWS(tvshow_id  NUMBER(7));
+
+Result: Tables MOVIES, TVSHOWS exist in the user account LAUREL
+
+TO check:
+SELECT OWNER, TABLE_NAME
+FROM DBA_TABLES
+WHERE OWNER IN ('HARDY', 'LAUREL');  # Laurel Movies, Laurel TVshows
+
