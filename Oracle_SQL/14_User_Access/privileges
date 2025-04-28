@@ -1,0 +1,37 @@
+***** CATEGORIES of PRIVILIGES *****
+
+- System privileges - the ability to perform  particulat task in the DB (required to perform a task in the DB)
+- Object privileges - the ability to perform a particular task on a particular DB object (required to use system privileges on any given DB object)
+- Role - a collection on one or more system privileges and/or object privileges and/or other roles
+
+Privileges can be granted to:
+- user account
+- role  ( Role can be granted to user account)
+
+Privileges and roles can later be revoked.
+Privileges and Roles - mechanism for managing and controlling access to the DB by user accounts.
+
+***** DATA about PRIVILIGES in the DATA DICTIONARY *****
+USER_SYS_PRIVS      System privileges granted to current user
+DBA_SYS_PRIVS       System privileges granted to users and roles
+USER_TAB_PRIVS      Grants on objects for which the user is the grantor, grantee, or owner
+ALL_TAB_PRIVS       Grants on objects for which the user is the grantor, grantee, or owner, or an enabled role or PUBLIC is the grantee
+DBA_TAB_PRIVS       Grants on all objects ib the DB
+ALL_TAB_PRIVS_RECD  Grants on objects for which the user, PUBLIC, or enabled role is the grantee
+SESSION_PRIVS       Privileges that are enabled to the user
+
+SELECT PRIVILEGE, ADMIN_OPTION
+FROM USER_SYS_PRIVS
+ORDER BY PRIVILEGE;
+
+A privilege can be granted directly as a privilege or indirectly as part of a role.
+When drop a privilege, check how it was granted.
+
+
+To see all object priveleges of current user account (granted to the account and by the account)
+SELECT GRANTOR, OWNER, GRANTEE, TABLE_NAME, PRIVILEGE, GRANTABLE
+FROM USER_TAB_PRIVS
+ORDER BY GRANTOR< OWNER, GRANTEE, TABLE_NAME, PRIVILEGE;
+
+
+
