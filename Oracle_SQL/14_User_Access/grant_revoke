@@ -1,0 +1,21 @@
+01  CONNECT SYSTEM/MANAGER
+02  CREATE USER HAROLD IDENTIFIED BY LLOYED;
+03  GRANT CREATE SESSION TO HAROLD;
+04  GRANT UNLIMITED TABLESPACE TO HAROLD;
+05  GRANT CREATE TABLE TO HAROLD;
+
+01 - establish session with the user account SYSTEM, password MANAGER
+     SYSTEM account is installed with every Oracle DB
+02 - creating a new user account (HAROLS/LLOYED)
+03 - give privilige to login to DB (min requirement)
+04 - give privilige to create DB objects
+05 - give system privelege to create table
+
+***** GRANT *****
+GRANT privilege1 (, privilege2, privilege3...)  TO user options;  # privilege(s)  - separated by comma
+
+***** REVOKE *****
+REVOKE privilege1 (, privilege2, privilege3...)  FROM user; 
+
+Note: If a user created tables, then his privilege to create table was revoked, tha tables already creater remain in place/ 
+
