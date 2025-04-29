@@ -1,0 +1,19 @@
+With Data dictionary you can check for the status of a ciew that you've created.
+Contains the query upon which the view is based (USER_VIEWS - TEXT column)
+  SELECT TEXT 
+  FROM USER_VIEWS
+  WHERE VIEW_NAME = "VM_Employees'
+
+View - a named query based on a table.
+If the table structure is altered, then it may change the status of the view to INVALID.
+
+To check a view status:
+
+SELECT STATUS,
+       OBJECT_TYPE,
+       OBJECT_NAME
+FROM USER_OBJECTS
+WHERE STATUS = 'Invalid'
+ORDER BY OBJECT_NAME;
+
+You can recompile Invalid views. 
