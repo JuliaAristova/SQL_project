@@ -1,0 +1,49 @@
+Data Dictionary - collection of DB tables and views. Metadata.
+Built automatically and populated by Oracle DB.
+
+Collects the resuls of all DDL statements (automatic updates).
+- names of DB objects, their owners, date of creation
+- names of tables' columns, data tyoes, precision, scale
+- any constraints
+- views, indexes, sequences
+over 2000 vies.
+  
+***** Structure *****
+
+DD consists of tables and views and and owned by SYS user account (="super user" account).
+Multiple level of abstructions to protect DB data integrity:
+- users have acces to DD views but not tables.
+- many DD objects are renamed via public synonyms.
+- updates automatically after execution of DDL statement.
+
+>>> DICTIONARY view contains information about the views that compose the data dictionary: 
+- name of each view
+- brief explanation of each view.
+
+>>> USER_TABLES view contains information about the tables owned by the current user account. (0ver 50 c0lumns)
+  Columns:
+  - TABLE_NAME 
+  - STATUS - is table currently valid
+  - ROW_MOVEMENT - is it enabled or not
+  - AVG_ROW_LEN - average length og the rows currently stored in the table
+
+>>> ALL_TABLES - same table information for the tables to which the current user has privileges
+                 Additional column - OWNER.
+ 
+>>>DBA_TABLES - same table information for all tables on the entire DB regardless of owner or table privilege
+                Additional column - OWNER.   
+
+
+
+***** PREFIXES ****
+    USER_      objects owned by the current user accessing the view
+    ALL_       objects owned by any user in the DB to which the current user has privileges
+    DBA_       all objects in the DB
+
+    V_$  (for views)            dynamic performance views
+    V$   (for public synonyms)
+    GV_$  (for views)           global dynamic performance views
+    GV$   (for public synonyms)  
+    OTHER: AUDIT_, TABLE_, INDEX_, SESSION_, ROLE_, etc.
+
+    
