@@ -1,0 +1,22 @@
+V_$   dynamic performance views, each of which has a public synonym counterpart.
+      Store information about the local DB instance.
+      Display information about current DB activity in real time. 
+      Maintained automatically by the system.
+      Accept simple queries (because of their dynamic nature).
+  
+      For complex quering:
+      - mirror views into set of temporary tables
+      - performing joins on temporary tables.
+  
+V$    public synonym for dynamic performance views.
+  
+GV_$  globaldynamic performance views
+
+Some of dynamic performance synonyms:
+V$DATABASE        info of DB itself (name, creation date, ISm platform, etc.)
+V$INSTANCE        instance name, host name, startuptime, etc.
+V$PARAMETER       current settings for system parameters (date, language, currency, etc.)
+V$SESSION         settings for each individual user session, active connection, login times, etc.
+V$RESERVED_WORDS  current list of reserved words, info if a keyword is always reserved or not
+V$OBJECT_USAGE    useful for monitoring the usage of INDEX objects
+V$TIMEZONE_NAMES  TZNAME column - time zone region, TZABBREV - time zone abbreviation
