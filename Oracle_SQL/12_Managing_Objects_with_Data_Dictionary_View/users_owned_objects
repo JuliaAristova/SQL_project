@@ -1,4 +1,4 @@
-To get information about your own user account;s objects:
+To get information about your own user account's objects:
 
 >>> USER_CATALOG - displays summary listing of tables, views, synonyms, sequences owned by the user. (= CAT)
 
@@ -13,6 +13,7 @@ To get information about your own user account;s objects:
    DESC USER_OBJECTS  # 2 ColumnsS: Name and Type
 
 >>> USER_TABLES - useful for inspecting table metadata (= TABS)
+
 >>> USER_TAB_COLUMNS - to inspect columns
 
 ***** FINDING COLUMNS *****
