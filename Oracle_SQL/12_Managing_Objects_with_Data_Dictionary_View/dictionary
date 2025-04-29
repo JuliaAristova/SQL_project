@@ -1,0 +1,17 @@
+
+DESC DICTIONARY;                    
+
+Name            Null        Type                # 2 columns
+----------------------------------
+TABLE_NAME                  VARCHAR(30)
+COMMENTS                    VARCHAR(4000)       # can contain a lot of information
+
+SELECT TABLE_NAME, COMMETNS
+FROM DICTIONARY
+ORDER BY TABLE_NAME;
+
+# to see anything that contins 'index'
+SELECT TABLE_NAME, COMMETNS
+FROM DICTIONARY
+WHER UPPER(COMMENTS) LIKE '%INDEX%'
+ORDER BY TABLE_NAME;
