@@ -1,0 +1,32 @@
+ORDER BY with SET operators
+
+ORDER BY clause determines how to sort rows by identifying a series of one or more expressions.
+ORDER BY accepts complex expressions (may include 1+ columns and perform some sort of transformation on the data).
+
+ORDER BY clause is restricted to identifying common expression items in the select list.
+
+If you combine a series of two or more SELECT statements with set operators,
+your ORDER BY clause must be the final clause and can specify columns by name only if it uses the column names from the first SElECT statement,
+regardless of how many SELECT statements might be connected with set operators.
+
+
+***** ORDER BY - by position approach *****
+
+SELECT 'Individual', last_name || ', ' || 'first_name'      #1 column - literal, 2 - column concatination of first and last name
+FROM cruise_customers
+UNION
+SELECT category, vendor_name
+FROM vendors
+ORDER BY 2;                      # ordering by concatinated name
+
+***** ORDER BY - by reference *****
+
+When using ORDER BY reference, the column name in force is whatever column name exists in the firs SELECT statement.
+
+SELECT 'Individual' AS contact_category, 
+last_name || ', ' || 'first_name' AS point_of_contact     
+FROM cruise_customers
+UNION
+SELECT category, vendor_name
+FROM vendors
+ORDER BY point_of_contact          #alias from first Select 
