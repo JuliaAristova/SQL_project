@@ -1,0 +1,14 @@
+VIEWS to inspect priveleges:
+
+USER_SYS_PRIVS    System privileges granted to the current user
+USER_TAB_PRIVS    Grannted privileges on objects for which the use is the owner, grantor, or grantee
+USER_ROLE_PRIVS   Roles ranted to the current user
+
+DBA_SYS_PRIVS    System privileges granted to users and roles
+DBA_TAB_PRIVS    All grants on objects in the DB
+DPA_ROLE_PRIVS   Roles granted to users and roles
+
+ROLE_SYS_PRIVS  System privileges granted to roles
+ROLE_TAB_PRIVS  Table privileges granted to roles
+
+SESSION_PRIVS    Session privileges that the user currently has set
