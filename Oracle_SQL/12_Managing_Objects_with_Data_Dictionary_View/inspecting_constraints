@@ -1,0 +1,27 @@
+***** USER_CONSTRAINTS view *****
+To inspect information about constraints
+
+To get constraints in Cruises table:
+
+SELECT CONSTRAINT_NAME,
+       CONSTRAINT_TYPE,
+      R_CONSTRAINT_NAME,
+      STATUS
+FROM USER_CONSTRAINTS
+WHERE TABLE_NAME = 'Cruises'
+
+>>>CONSTRAINT_TYPE:
+P = Primaary Key
+R = Foreign Key (R - referential integrity)
+U = Unique
+C = Check or Not Null constraint
+
+DELETE_RULE column  - shows whether FR constraing was created with ON DELETE CASCADE or ON DELETE SET NULL
+SEARCH_CONDITION column - useful to inspect CHECK constraint
+  SELECT SEARCH_CONDITION
+  FROM USER_CONSTRAINTS
+  WHERE CONSTRAINT_NAME = 'CK_PROJECT_COST' AND CONSTRAINT_TYPE = 'C';
+
+***** USER_CONST_COLUMNS view *****
+To get information about which columns in a table are constrained and what the names
+are of the referenced tables and columns that make up the FK constraints.
