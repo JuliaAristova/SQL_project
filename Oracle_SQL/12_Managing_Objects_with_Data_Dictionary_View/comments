@@ -1,0 +1,40 @@
+COMMENTS - describe the intent of the various views of the data dictionary and the columns within them.
+
+To check comments:
+ALL_TAB_COMMENTS    displays comments for all objects in the DB
+ALL_COL_COMMENTS    displayes comments for all tables and views in the DB
+
+SELECT 'Table: ' || TABLE_NAME, COMMENTS
+FROM ALL_TAB_COMMENTS
+WHERE OWNER = 'SYS' AND TABLE_NAME = 'USER_SYNONYMS'
+UNION
+SELECT 'Column: ' || COLUMN_NAME, COMMENTS
+FROM ALL_COL_COMMENTS
+WHERE OWNER = 'SYS' AND TABLE_NAME = 'USER_SYNONYMS'
+
+***** ADDING COMMENTS *****
+COMMENT statement - to add comments to the data dictionary for a particular DB object.
+
+COMMENT ON objectType fullObjectName IS c1;
+
+objectType - TABLE, COLUMN, INDEXTYPE, OPERATOR, MATERIALIZED VIEW and others.
+fullObjectName - object name for which you want to add a comments (name of a table, if column - tableName.columnName)
+c1 - full text of comment
+
+Adding comment to a table --> comments are displayed in:
+- USER_TAB_COMMENTS
+- ALL_TAB_COMMENTS
+- DBA_TAB_COMMENTS
+
+Adding comment to a column --> comments are displayed in:
+- USER_COL_COMMENTS
+- ALL_COL_COMMENTS
+- DBA_COL_COMMENTS
+
+Examples:
+COMMENT ON TABLE Ports IS 'Listing of all ports of departure and arrival';
+
+COMMENTS ON COLUMN Ports.capacity IS 'Maximum number of passengers (exclusive of crew)';
+
+To drop a comment - change to empty string
+COMMENT ON TABLE Ports IS '';
