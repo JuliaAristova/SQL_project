@@ -1,0 +1,43 @@
+Shema objects - owned by a user and exist in a collection within a user account.
+
+***** TABLES *****
+
+Table - to store data
+When a table is created - metadata --> Data Dictionary (managed automatically)
+
+Columns stored in the order they are created.
+If you ALTER a table and add a column --> new column will be added at the end of the list of the columns.
+
+***** CONSTRAINTS *****
+
+Constraint - rule on a table that restricts the values that can be added to a table columns.
+It is not a DB object, but it is listed in Data Dictionary.
+Types of constriants: 
+  NOT NULL
+  INIQUE
+  REIMARY KEY
+  FOREIGN KEY
+  CHECK
+
+If you try to add/delete row to/from a table that violates a constraint --> execution error
+
+***** VIEW *****
+
+VIEW - acts like a table. It stores no data. It is a SELECT statement that is saved in the DB with a name assigned to it.
+You can:
+- describe view with DESCRIBE
+- query view with SELECT
+- depends on a view you might be able to INSERT, UPDATE, and/or DELETE statements on a view to manipulate the contents of the underlying tables.
+
+***** INDEXES *****
+
+When you create an INDEX object, you are identifying one or more columns in a table that supposed to be frequently used to look up data.
+Then you create an index based on that column(s). Then Oracle builds a separate object that takes a unique list of all the data 
+currently in that column, sort it accordint to data type, and then stores internal addressing information that ties the index to the source table 
+and the rows contained them.
+Indexes can be very beneficial for performance.
+
+***** SEQUENCES *****
+
+A Sequence is a counter, issues a number in a particular series, always keeping track of whatever the next number should be.
+Purpose - to support the process of adding rows to a particular table.
