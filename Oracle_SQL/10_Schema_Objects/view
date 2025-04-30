@@ -1,0 +1,95 @@
+VIEW - is a SELECT statement with the name stored in the DB.
+Can be queried with SELECT.
+
+Benefits:
+- Security (some information in the based table can be hidden when view is created)
+  - ability to make a complex query easier to work with (you can create a view based on a complex join with tables and other views).
+
+***** CREATE VIEW *****
+
+CREATE VIEW VW_Employees AS
+  SELECT employee_id, last_name, first_name, primary_phone
+FROM Employees;
+
+To check: DESCRIBE VW_Employees;
+
+To query: SELECT * FROM VW_Employees;
+
+NOTE:
+CREATE VIEW view_name AS...   or CREATE OR REPLACE VIEW view_name AS...
+Result in view must have valid column names (column names or aliases)
+
+CREATE OR REPLACE VIEW VW_Employees (id, name, phone) AS        #assigning names to view's columns
+  SELECT employee_id, 
+         last_name || ', ' || first_name,                       # or you can use alias here
+         primary_phone
+FROM Employees;
+
+>>> VIEWs and CONSTRAINTs
+  You can create constraint on a view (similar as for tables).
+
+***** UPDATABLE VIEWS *****
+
+If the view contains all the columns which have constraints in any underlying table, you can use INSERT, UPDATE, and DELETE on the view.
+Example. the view does not have columns wit NOT NULL constraints, you won't be able to INSERT, but may be able to UPDATE or DELETE.
+
+A view that is based on aggregated rows is not updatable.
+VIEWs ara not updateble if:
+  - omission of any required columns (NOT NULL) in that underlying table
+  - GROUP BY or any other aggregation, such as set operators
+  - DISTINCT
+    - a FROM clause that refferences more that one table (subqueries in the SELECT or most JOINs)
+
+***** INLINE VIEWS *****
+
+Inline view is a subquery that is contained within a larger SELECT statement in such a way that it
+replaces the ROM clause of a SQL statement
+
+      SELECT * 
+      FROM (SELECT * FROM DUAL);    # SELECT FROM DUAL - inline view 
+      Note: can be unlimited nesting (limit for typical subqueries - 255)
+
+Inline views can be any valid SELECT statement, placed into SQL statement where the FROM clause would noremally go.
+
+     SELECT ROWNUM, invoice_id, account_number
+     FROM (SELECT invoice_id, account_number
+           FROM invoices 
+           ORDER BY invoice_date)                  # executed first - before ROWNUM
+     WHERE ROWNUM <= 3; 
+
+  ***** ALTER VIEW *****
+
+  Used to:
+  - create, modify, or drop constraints on a view
+  - recompile an invalid view
+
+  ALTER VIEW view_name COMPILE;      
+      Output 1 - successfully executed
+                                      Output 2 - can stay invalid if some change in underlying table effected (column that is a part of view is dropped or renamed )
+
+***** VISIBLE / INVISIBLE COLUMNS *****
+>>> Invisible columns and Tables
+Column in table is visible by default
+To specify a column as invisible:
+  CREATE TABLE ship_admin (
+    ship_admin_id      NUMBER(&) PRIMARY KEY,
+    ship_id            NUMBER,
+    construction_cost  NUMBER(14, 2) INVISIBLE);
+
+DESC ship_admin:   # 2 columns displayed
+  You can INSERT into invisible column but you need to specify the column name (INSERT INTO ship_admin(ship_admin_id, ship_id, construction_cost) VALUES (...);
+  (shorthand syntax does not work if your want to insert all 3 values)
+
+>>> Invisible coViews
+If you want to create a view with columns that are invisible in the underlying table
+
+  CREATE OR REPLACE VIEW VW_ship_admin AS (
+    SELECT * FROM ship_admin);            # view contains only 2 visible columns
+
+  SELECT * FROM VW_ship_admin  --> displays 2 columns (even if you use column names)
+  
+    CREATE OR REPLACE VIEW VW_ship_admin AS (
+      SELECT * Fship_admin_id, ship_od, construction_cost) FROM ship_admin);     # view contains 3 columns
+
+  SELECT * FROM VW_ship_admin -- will display 2 columns (to see invisible column you have to use column names)
+  
