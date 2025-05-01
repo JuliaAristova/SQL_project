@@ -1,0 +1,27 @@
+UPDATE - to modify existing data in th DB
+- used to modify one or more columns
+- can change all rows in a table
+- can change only selected rows
+- can work with TABLEs and certain VIEWs
+- violation of constraints results in runtime error (entire UPDATE statemnt will be rejected)
+- WHERE clause specifies row to be updated (if ommitted all raws will be updated)
+- can use expression: literal values, mathemarical equation, SQL functions
+
+UPDATE table_name 
+  SET cruise_name = 'Bahamas'.          # columns in any orderr 
+      start_date = '01-DEC-11',
+WHERE cruise_id = 1;
+
+***** USING EXPRESSIONS *****
+
+UPDATE compenstaions
+  SET salary = salary * 1.03,
+      last_changed_datee = SYSDATE
+  WHERE employee_number = 83;
+
+NOTE:
+You can add data to the table using UPDATE (Replace NULL value in a column with appropriate value)
+YOU can remove data fromt the table using UPDATE  (set value of a column to NULL)
+You are not inserting or deliting row, but update values
+
+
