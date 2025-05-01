@@ -1,0 +1,15 @@
+Entity-Relationship Diagram (ERM)
+
+- ERD is a logical model of an existing business
+- The entities in an ERD are the "things" that can form the basos pf a business information system
+  and that are transformed intp tables in a DB
+- ERD is a logical representation of a business; the relational DB is the physical model in which
+  actual data can be housed and processed in support pf the business process
+
+The table is a physical implementation of an entity (columns is physical implementation of an entity's attribute).
+Relationship specifies how two entities relate to each other.
+
+Relationship between entities:
+- one-to-one
+- one-to-many
+- many-to-many
