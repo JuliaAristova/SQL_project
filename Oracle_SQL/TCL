@@ -1,6 +1,0 @@
-TCL
-
-COMMIT - saves a set of DML modifications performed in the current DB session
-ROLLBACK - undoes a set of DML smodifications performed during the current DB session
-SAVEPOINT - marks a position in a session to prepare for a future ROLLBACK to enable that ROLLBACK 
-            to restore data at a selected point in a session other than the most recent commit event.
