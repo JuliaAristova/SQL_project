@@ -1,0 +1,44 @@
+TRUNCATE TABLE table_name;
+
+TRUNCATE TABLE:
+- removes all the rows in a given table
+- removes all data in the associated indexes
+- does not fire any DML triggers
+- Leaves the table and index structure intact
+- Leaves all dependencies intact, such as child tables
+- data cannot be recoved
+- performs an implicit commit
+- required DROP_ANY_TABLE privilege
+- cannot be rolled back
+- does not work with FLASHBACK_TABLE
+- it is DDL statement
+
+TRUNCATE TABLE usage:
+- to remove all the rows of a table without firing any DML triggers
+- selectively removing data from any associated INDEX objects
+- to drop and recreate table, since it leaved the table and relationship intact (keeps indexes)
+- quicker than DELETE (as it is DDL)
+
+***** RECURSIVELY tRUNCATE CHILD TABLES *****
+
+TRUNCATE TABLE table_name CASCADE;
+
+CREATE TABLE ports(                # parent table
+  port_id      Number,
+  port_name    VARCHAR(20),
+  country      VARCHAR2(40),
+  capacity     NUMBER,
+  CONSTRAINT   port_PK PRIMARY KEY (port_id)
+  );
+
+CREATE TABLE ships(                # child table
+  ship_id      NUMBER,
+  ship_name    VARCHAR(20),
+  home_port_id NUMBER,
+  CONSTRAINT   ships_ports_PK FOREIGN KEY(hope_port_id) REFERENCE ports (port_id) ON DELEDE CASCADE
+  );
+
+DELETE ports; --> removes all rows from ports and associated rows in  ships (PK == FK because of ON DELEDE CASCADE)
+TRUNCATE TABLE ports; --> error
+You need to use
+TRUUNCATE TABLE ports CASCADE;  # confirmation to remove rows from associated child table
