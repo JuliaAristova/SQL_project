@@ -1,0 +1,57 @@
+TCL provide the functionality to save or undo the changes made with DML statements.
+- COMMIT
+- ROLLBACK
+- SAVEPOINT
+
+***** COMMIT *****
+  
+- saves changes to the DB since the session hegan or since the most recent commit in the session
+- make changes to the DB permanent (cannot be ROLLBACK)
+
+Transaction - series of SQL statement, considered as one union. Commit event completes transaction.
+
+>>> EXPLICIT COMMIT - when COMMIT statement is executed.
+        COMMIT;
+        COMMIT WORK;  # WORK - optional
+
+>>> IMPLICIT COMMIT - occurs automatically when certain DB events occur.
+Events:
+- immediately before and ofter an attempt to execute any DDL (Create, Alter, Drop, Grant, Revoke)
+- normsl exit from most of Oracle's utilities and tools.
+  
+***** ROLLBACK *****
+  
+- undoes changes to the DB that have been performed within a given session and not committed.
+- it does not remove any changes that have been committed.
+
+COMMIT;
+INSERT INTO ports (port_id, port_name) VALUES (701, 'Chicago');
+DELETE FROM ships;
+ROLLBACK;
+
+Both, Insert and Delete, are reversed.
+Both chages, performed uncommited DML statements are visible within the session until those changes are rolled back.
+
+To undo changes to a particular SAVEPOINT:
+ROLLBACK TO savepoint_name;  
+ROLLBACK WORK TO savepoint_name:
+
+***** SAVEPOINT *****
+
+- establishes demarcation points withina transaction to empower any following COMMIT and ROLLBACK statements
+to subdivide the points at which data may later be optionally saved or undone.
+- SAVEPOINT marks system change number (SCN).
+
+COMMIT;
+UPDATE ships SET home_port_id = 21 WHERE ship_id = 12;
+SAVEPOINT SP_1;
+UPDATE ships SET home_port_id = 22 WHERE ship_id = 12;
+ROLLBACK WORK TO SP_1;                                    # hope_port_id = 21
+COMMIT;
+
+- All SAVEPOINT statements must include a name.
+- savepoint names should not be duplicated within a single transaction (there in no syntax or runtime error,
+  new SAVEPOINT will override earlier SAVEPOINT).
+- once a commit event occurs all existing savepoints are erased from memory. Any references to them by future TCL 
+  will produce an error.
+- when try to rollback to a nonexistent SAVEPOINT --> error
