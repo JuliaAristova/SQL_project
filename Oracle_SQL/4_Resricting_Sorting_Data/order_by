@@ -1,0 +1,57 @@
+ORDER BY - sorts the retrieved rows
+- only for display purpose (not saved)
+- ASC (default) or DESC 
+- sort by expression lists
+- only in SELECT statement
+- always the final clause in SELECT statement
+- NULL values considere the 'highest' (at the end is asc)
+- you can order by column which is not in SELECT list
+- without ORDER BY there is no quarantee how results are displayed.
+
+SELECT address_id, street_address, city, state, country
+FROM addresses
+ORDER BY state, city;
+
+More readable if columns in SELECT and ORDER BY are in the same position:
+SELECT state, city, address_id, street_address, country
+FROM addresses
+ORDER BY state, city;
+
+>>> EXPRESSIONS
+
+SELECT project_id, project_name, project_cost, days, project_cost/days
+FROM projects
+ORDER BY project_cost / days;
+
+>>> COLUMN ALIAS
+
+SELECT project_id, project_name, project_cost, days, project_cost/days AS per_day_cost   # AS - optional
+FROM projects
+ORDER BY per_day_cost;
+
+- each expression in SELECT may optionally be followed by column alias
+- alias is placed after espression, AS is optional
+- alias in double quotes can contain spaces and special characters
+- if no "" - standard naming rules applied
+- alias does not exist outside SELECT statement
+- aliases must be unique, they become headers in the output
+- aliases can be used only in ORDER BY (not in WHERE, GROUP BY, HAVING)
+
+>>> REFERENCE BY POSITION
+Applies only you ORDER BY expression included in SELECT list
+
+SELECT project_id, project_name, project_cost, days, project_cost/days 
+FROM projects
+ORDER BY 5;            # 5 - project_cost/days
+
+>>> COMBINATION
+Difference techniques can be combine: reference by name, reference by column alias, reference by position
+
+SELECT project_id, project_cost, project_name "The Project", days 
+FROM projects
+ORDER BY project_id DESC, "The Project", 2;
+
+>>> ORDER BY and NULL
+NULL  considered ad "greater than" any other value (all data types).
+
+
