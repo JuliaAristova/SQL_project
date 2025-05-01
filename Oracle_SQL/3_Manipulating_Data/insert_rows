@@ -1,0 +1,55 @@
+INSERT
+- to add one row at a time
+- to add multiple rows at once (from source to target table)
+- can be used with TABLE and VIEW objects
+
+INSERT INTO table_name (col1, col2, col3...) VALUES (val1, val2, val3, ...);  #better approach 
+                                             - will work if there is a structural changed in the table
+
+or if colum names are omitted:
+INSERT INTO table_name VALUES (val1, val2, val3, ...);  # values must match order of the columns in target table
+
+Note: 
+- order of columns in INSERT does not need to match order of the columns in the table structure,
+- does not need to include all columns in the table - Enumerated column list (list column names, values you want to insert)
+- columns with constraint (NOT NULL, PK) must be inserted (if not - running time error)
+- any columns with DEFAULT value assigned can be omitted
+- order of values must match columns
+- data type of inserted values must match or be compatible
+- list of values may include expressions (result data type must be compatible with the target row)
+- column constraint violation results in runtime error
+
+INSERT INTO cruises (
+  cruise_id, 
+  cruise_type_id,
+  cruise_name,
+  captain_id,
+  start_date,
+  end_date,
+  status)
+VALUES (1, 1, 'Day At Sea', 101, '02-Jan-10', '09-Jan-10', 'Sched');
+
+***** DATA TYPE CONVERSION *****
+
+When INSERT INTO data types of values are compared to data types of columns - must be compatible.
+
+Oracle provides implicit data type conversion if it is possible (ex, '101' --> 101, or 2020 --> '2020'), 
+but encourage to use explicit conversion when necessary (TO_CHAR, TO_NUMBER, TO_DATE).
+
+***** INSEET AND CONSTRAINTS *****
+If constraint is violated --> runtime error 
+
+Example, 
+table: CONSTRAINT cruise_name_ck CHECK (cruise_name IN ('Haqaii', 'Bahamas', 'Bermuda', 'Mexico', 'Day at Sea')
+sequence added: CREATE SEQUENCE seq_cruise_id;
+
+# logically incorrect as it is a new sequence and NEXTVAL gives 1 
+INSERT INTO cruises (cruise_id, cruise_name)
+VALUES (seq_cruise_id.NEXTVAL, 'Hawaii');
+
+# syntactically incorrect as cuise_name violated CHECK constraint 
+INSERT INTO cruises (cruise_id, cruise_name)
+VALUES (seq_cruise_id.NEXTVAL, 'Hawaii and Back');
+
+Note: eventhough INSERT statement is failed sequence generator advanced by 1. Any attempt to invoke a sequence generator
+will advance the number count, even if the DML statement fails.
