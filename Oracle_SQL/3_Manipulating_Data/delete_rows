@@ -1,0 +1,9 @@
+DELETE:
+- to remove row(s) of data from tables
+- WHERE clause - to specify the row to be removed (all rows if omitted)
+
+DELETE FROM project_listing
+WHERE construction_id = 12;
+
+DELETE project_listing          # FROM is optional
+WHERE construction_id = 12;
