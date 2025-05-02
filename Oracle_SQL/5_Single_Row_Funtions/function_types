@@ -1,0 +1,36 @@
+Single-row functions (scalar functions) - return one answer for each one row processed.
+
+***** CHARACTERISTICS of FUNCTIONS *****
+
+1. They may accept incoming values (parameters); few functions take no parameters
+2. They incorporate parameter data unto some sort of process (they perform some sort of tasks on the incoming data,
+   such as calculation or some other activity).
+3. They return one single answer as a result.
+
+SELECT last_name, INITCAP(last_name) FROM online_subscribers; --> INITCAP returns value for each one row
+
+***** INVOKE  FUNCTION *****
+
+Functions can be called from:
+- SELECT: select list and WHERE clause
+- INSERT: list of values
+- UPDATE: SET clause and WHERE clause
+- DELETE: WHERE clause
+- any other place that an expression can be called
+
+
+***** TYPEs of  FUNCTIONs *****
+
+- Built-in - part of SQL; available with every standard implementation of SQL
+- User-defined - created by users. Created using languages such as PL/SQL.
+
+***** CATEGORIES of BUILD-IN FUNCTIONs *****
+
+- character functions - to manipulate text: LENGTH, RPAD, LPAD, RTRIM, LTRIM, TRIM, INSTR, SUBSTR, REPLACE, SOUNDEX, etc.
+
+- number functions - to perform mathematical analysis: SIN, ASIN, SIN, COS, ACOS, COSH. TAN, ATAN, ATAN2, TANH, ABS, 
+                     SIGN, ROUND, TRUNC; can be combined with operators (+, -, /, *)
+
+- date functions - to perform DATE manipulation: SYSTEMDATE, SYSTEMSTAMP, ROUND, TRUNC, MONTH_BETWEEN, ADD_MONTHS. etc.
+
+- other - don't quite fit into the categories: USER (no parameters, shows the name of the current user account)
