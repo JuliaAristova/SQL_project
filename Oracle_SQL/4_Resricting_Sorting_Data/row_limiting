@@ -8,7 +8,7 @@ Row limiting clause can be used to choose specified amount tof rows.
 - ROW or ROWS - both acceptable
 - ONLY or WITH TIES
   >>> ONLY - returns soecified number(%) of rows
-  >>> WITH TIES - some additional rows can be displayed (ORDER BY connecion)
+  >>> WITH TIES - to include rows that have identical sorted values as specified by ORDER BY and would otherwise be arbitrarily omitted from the return set.
 - output by default starts with the 1 row
 - OFFSET - to specify the starting point (by default OFFSET = 0)
 
@@ -24,6 +24,7 @@ FETCH FIRST 50 PERCENT ROWS WITH TIES;         # 5 rows instead of 4 will be in 
 
 ***** OFFSET *****
 
+OFFSET - to determine the starting point, optional, default = 0; number or rows (not %)
 SELECT * FROM orders
 OFFSET 5 ROWS
 FETCH FIRST 2 ROWS ONLY;
