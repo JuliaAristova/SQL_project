@@ -1,0 +1,89 @@
+WHERE
+- to identify rows that you want to include in SQL statement (SELECT, UPDATE, DELETE)
+- optional
+- followed by FROM
+- consists on 1+ comparison(s)
+
+SELECT port_name, capacity 
+FROM ports
+WHERE capacity >= 5;
+
+>>> OPERATORs
+
+=  >  >=  <  <= 
+not equal:  !=    <>     ^=
+IN    LIKE    IS
+
+>>> COMPARING EXPRESSIONS
+
+WHERE salary >= 50899 * 1.12
+WHERE start_date < end_date
+
+>>> COMPARING DATA TYPEs
+In a single comparison, both expressions should be the same data type.
+Comparison is case-sensitive by default.
+
+Numeric - smaller numbers are less than greater numbers
+Character - A < Z, Z , a, '2' > '10'
+Dates - earlier dates are less than later dates.
+
+>>> LIKE 
+useful for performing wildcard searches on character data.
+
+underscore (_) - single charackter; can be repeated
+% - zero or more caracters
+
+patterns put after LIKE in single quotes.
+
+SELECT port_name FROM ports
+WHERE port_name LIKE '_o%';  # Los Angeles; Honolulu
+
+>>> BOOLEAN LOGIC 
+
+AND  - both expressions must be true for the combination to be true. Otherwise it is false.
+OR - at leaset one expression needs to be true for the combination to be true. Otherwise it is false.
+
+NOT - infront of the expression to reverse its conslusion.
+  SELECT employee_id FROM work_history
+  WHERE ship_id = 3 AND 
+                     NOT status = 'Pending'
+
+WHERE NOT ship_id = 3    
+WHERE ship_id != 3
+WHERE ship_id <> 3
+
+>>> OPERATOR PRECEDENCE - boolean expressions
+1 - NOT
+2 - AND
+3 - OR
+
+SELECT room_number FROM ship_cabin
+WHERE style = 'Suite' OR style = 'Stateroom' AND window = 'Ocean';
+# WHERE (style = 'Suite') OR (style = 'Stateroom' AND window = 'Ocean');
+
+>>> IN
+
+- can be used with dates, numbers, text espressions
+- list of expressions must be in ( )
+- expression must be the same/or similar data type
+- one or more expressions separated by comma
+- can use NOT IN
+
+SELECT port_name FROM ports
+WHRRE country IN ('UK', "USA', 'Bahamas');
+
+>>> BETWEEN
+- is inclusive
+- range should be from lowest to highest (if not - output is zero rows)
+- can use NOT BETWEEN
+
+SELECT port_name FROM ports
+WHRRE capacity BETWEEN 3 AND 4;      # (capacity >= 3 AND capacity <=4)
+
+>>> IS NULL, IS NOT NULL
+
+NULL = 'I do not know'
+
+  SELECT port_name FROM ports
+# WHERE capacity = NULL;         # returns no row
+  WHERE capacity IS NULL;
