@@ -1,18 +1,21 @@
 WHERE
 - to identify rows that you want to include in SQL statement (SELECT, UPDATE, DELETE)
 - optional
-- followed by FROM
-- consists on 1+ comparison(s)
+- in SELECT follow FROM
+- expressions may include reference to column names as well as literal values
+- consists on 1+ comparison(s) connecting using Boolean operators AND / OR, NOT can also be included
 
-SELECT port_name, capacity 
-FROM ports
-WHERE capacity >= 5;
+
+  SELECT port_name, capacity FROM ports
+  WHERE capacity >= 5;
 
 >>> OPERATORs
-
-=  >  >=  <  <= 
-not equal:  !=    <>     ^=
-IN    LIKE    IS
+  =  >  >=  <  <= 
+  not equal:  !=    <>     ^=
+  IN - compare single value to a set of values
+  LIKE - activate wildcard characters (_, %)
+  IS - IS NULL, IS NOT NULL
+  BETWEEN - 
 
 >>> COMPARING EXPRESSIONS
 
@@ -70,7 +73,7 @@ WHERE style = 'Suite' OR style = 'Stateroom' AND window = 'Ocean';
 - can use NOT IN
 
 SELECT port_name FROM ports
-WHRRE country IN ('UK', "USA', 'Bahamas');
+WHERE country IN ('UK', "USA', 'Bahamas');
 
 >>> BETWEEN
 - is inclusive
@@ -78,7 +81,7 @@ WHRRE country IN ('UK', "USA', 'Bahamas');
 - can use NOT BETWEEN
 
 SELECT port_name FROM ports
-WHRRE capacity BETWEEN 3 AND 4;      # (capacity >= 3 AND capacity <=4)
+WHERE capacity BETWEEN 3 AND 4;      # (capacity >= 3 AND capacity <=4)
 
 >>> IS NULL, IS NOT NULL
 
