@@ -1,0 +1,41 @@
+Overall intent of numerical functions is to perform numeric analysis and perform the sort of tasks typically associated with 
+numeric manipulation and data processing (analysis and calculation).
+
+CEIL(n) - n required, any numeric data type. Returns the smallest integer that is >= n
+
+FLOOR(n) - n required, any numeric data type. Returns the smallest integer that is <= n
+
+ROUND(n, i)  - n required, any numeric data type, 
+               i - integer, if omitted = 0 by default.
+               If i = 0 --> n is rounded to the neares whole number (zero decimal points)
+               If i > 0 --> n is rounded to i places to the right of the decimal point
+               If i < 0 --> n is rounded to i places to the left of the decimal point 
+
+ SELECT ROUND(12.355143, 2),      # 12.36
+         ROUND(259.99, -1)         # 260
+  FROM DUAL;
+
+TRUNC(n, i) - n required, any numeric data type, 
+              i - integer, optional, if omitted = 0 by default.
+              Rounds toward zero
+  SELECT TRUNC(12.355143, 2),      # 12.35
+         ROUND(259.99, -1)         # 250
+  FROM DUAL;
+
+REMINDER and FLOOR =- variation of division and leftpver values.
+
+REMAINDER(n1, n2) - n1, n2 - numbers, required
+                    Identifies the multiple of n2 that is nearest to n1 and returns the difference between those two values
+                    if the multiple is higher, REMINDER returns a negative number to indicate that the closest multiple og n2 is higher than n1.
+
+  SELECT REMAINDER(9, 3),        # 0
+         REMAINDER(10, 3),       # 1
+         REMAINDER(11, 3)        # -1 - the nearest integer divisible by 3 is 12, it is closer to 11 than 9 --> -1
+  FROM DUAL;
+
+MOD(n1, n2) - n1, n2 - numbers, both required.
+              Performs the same task as REMINDER, but uses FLOOR
+
+ SELECT MOD(9, 3),        # 0
+        MOD(10, 3),       # 1
+        MOD(11, 3)        # 2 
