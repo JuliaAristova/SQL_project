@@ -7,37 +7,37 @@ Purpose:
   such as input data for an INSERT/UPDATE, criteria of HAVING/GROUP BY, etc.)
 - scope of variable - session
 
-SELECT room_numer, style, windor
-FROM ship_cabin
-WHERE room_number = &RNO          # prefix ampersand  &, variable name (alphanumeric, no spaces)
-ORDER BY room_number;
+  SELECT room_numer, style, windor
+  FROM ship_cabin
+  WHERE room_number = &RNO          # prefix ampersand  &, variable name (alphanumeric, no spaces)
+  ORDER BY room_number;             # During the execution you will be prompt to enter room number
 
-During the execution you will be prompt to enter room number
-
-WHERE window = '&window_type'      # enter Ocean
-WHERE windor = &window_type;       # enter 'Ocean'
+  Legal syntax:  WHERE window = '&window_type'      # enter Ocean
+                 WHERE windor = &window_type;       # enter 'Ocean'
 
 ***** DEFINE & UNDEFINE commands *****
 
-DEFINE vWindows = Ocean        #  &  - prefix; no semicolon at the end not required here (required for SQL statements)
+DEFINE - to see all existing defined variables
 
-To see all existing defined variables --> DEFINE
+We can define substitution variable using DEFINE statement, so SQL will used this value when query is executed.
 
-Defined variables in a scope during the session.
-To undefine:
-UNDEFINE vWindows    # not define any longer in the session
+DEFINE vWindows = Ocean        #  no &; no semicolon at the end not required here (required for SQL statements)
+                               Note: defined variables in a scope during the session.
+UNDEFINE vWindows              # not define any longer in the sessionTo undefine:
+
 
 ***** SET & SHOW commands *****
- SQL*Plus:
-SET - to configure system variables
-SHOW - to display the particular system variable current state (ON or OFF)
-SHOW ALL - to see all system variables
+SQL*Plus - SYSTEM variable:
+  
+  SET - to configure system variables
+  SHOW - to display the particular system variable current state (ON or OFF)
+  SHOW ALL - to see all system variables
 
 >>> VERIFY
 
-SET VERIFY OFF  - 'old' and 'new' lines won't be displayed (when you are prompt to enter value for var)
-to restore:
-SET VERIFY ON
+SET VERIFY OFF    - 'old' and 'new' lines won't be displayed (when you are prompt to enter value for var)
+SET VERIFY ON    - to restore:
+
 
 ***** ACCEPT and PROMPT *****
 
@@ -46,13 +46,12 @@ ACCEPT - will receive data from a user to store in a predefined variable.
 
 >>> DEFINE System Variable
 
-TO use substitution variable DEFINE system variable must be set to ON. (it is ON by default).
+SET DEFINE ON  -to use substitotution variable DEFINE system variable must be set to ON. (it is ON by default).
 
-SET DEFINE ON   
 SET DEFINE OFF  
 
-to change prefic of ampersand sustitution variable:
-SET DEFINE *       # changes & to *  (prefix - single character)
+SET DEFINE new_prefix   to change prefic of ampersand sustitution variable (prefix - single character)
+SET DEFINE *       # changes & to *  
 
 ECHO - command to display statements themselves
 
