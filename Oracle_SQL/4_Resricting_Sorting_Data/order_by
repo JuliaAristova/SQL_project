@@ -1,21 +1,24 @@
-ORDER BY - sorts the retrieved rows
-- only for display purpose (not saved)
-- ASC (default) or DESC 
-- sort by expression lists
+ORDER BY - sorts the retrieved rows.
+
 - only in SELECT statement
+- only for display purpose (not saved)
 - always the final clause in SELECT statement
-- NULL values considere the 'highest' (at the end is asc)
+- sorts by expression lists (sorts starting from first expression)
 - you can order by column which is not in SELECT list
+- ASC (default) or DESC 
 - without ORDER BY there is no quarantee how results are displayed.
+- can sort by alias and position
+- sorts according data types
+- NULL values considered the 'highest' (at the end is asc)
 
 SELECT address_id, street_address, city, state, country
 FROM addresses
 ORDER BY state, city;
 
 More readable if columns in SELECT and ORDER BY are in the same position:
-SELECT state, city, address_id, street_address, country
-FROM addresses
-ORDER BY state, city;
+  SELECT state, city, address_id, street_address, country
+  FROM addresses
+  ORDER BY state, city;
 
 >>> EXPRESSIONS
 
@@ -40,16 +43,16 @@ ORDER BY per_day_cost;
 >>> REFERENCE BY POSITION
 Applies only you ORDER BY expression included in SELECT list
 
-SELECT project_id, project_name, project_cost, days, project_cost/days 
-FROM projects
-ORDER BY 5;            # 5 - project_cost/days
+  SELECT project_id, project_name, project_cost, days, project_cost/days 
+  FROM projects
+  ORDER BY 5;            # 5 - project_cost/days
 
 >>> COMBINATION
 Difference techniques can be combine: reference by name, reference by column alias, reference by position
 
-SELECT project_id, project_cost, project_name "The Project", days 
-FROM projects
-ORDER BY project_id DESC, "The Project", 2;
+  SELECT project_id, project_cost, project_name "The Project", days 
+  FROM projects
+  ORDER BY project_id DESC, "The Project", 2;
 
 >>> ORDER BY and NULL
 NULL  considered ad "greater than" any other value (all data types).
