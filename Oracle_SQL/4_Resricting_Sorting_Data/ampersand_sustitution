@@ -1,4 +1,5 @@
 Ampersand substitution variable ia s feature of SQL*Plus (not part of SQL).
+It is used in batch or interactive SQL*Plus processing.
 
 Purpose: 
 - to provide A SQL script with a run-time parameter feature when used within SQL*Plus sessions
@@ -18,7 +19,7 @@ WHERE windor = &window_type;       # enter 'Ocean'
 
 ***** DEFINE & UNDEFINE commands *****
 
-DEFINE vWindows = Ocean        # no & prefix; semicolon at the end not required here (required for SQL statements)
+DEFINE vWindows = Ocean        #  &  - prefix; no semicolon at the end not required here (required for SQL statements)
 
 To see all existing defined variables --> DEFINE
 
@@ -51,7 +52,7 @@ SET DEFINE ON
 SET DEFINE OFF  
 
 to change prefic of ampersand sustitution variable:
-SET DEFINE *       # changes & to *
+SET DEFINE *       # changes & to *  (prefix - single character)
 
 ECHO - command to display statements themselves
 
