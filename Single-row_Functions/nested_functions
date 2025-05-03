@@ -1,3 +1,0 @@
-When one function is nested withing another, original function becomes nested.
-Most inner function is executed first.
-Most outer function is executed last.
