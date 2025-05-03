@@ -1,0 +1,34 @@
+CONVERSION FUNCTIONS
+- to convert from one data type to another
+- once converted value can be used as input to some other functions
+- some conversion functions provide formatting
+
+DATA TYPES:
+- numeric (NUMBER)
+- text (VARCHAR2)
+- date and/or time (DATE, TIMESTAMP, etc.)
+
+Conversion:
+- explicit
+- implicit
+  
+***** IMPLICIT CONVERSION *****
+
+Automatically, SQL will determine that a data type conversion is requiered but not specified.
+SELECT 'Chapter ' || 1 || '...I am born.' FROM SELECT;  # Chapter 1 ... I am born
+
+SELECT SYSDATE, 
+       ADD_MONTHS(SYSDATE, SUBSTR('plus 3 months', 6, 1)) plust_three  # substring returns '3'
+FROM DUAL;
+
+Good practice: to avoid dependence on automatic data type conversion
+
+- Numeric values will generally not convert automatically to dates.
+- Numeric and text data will generally not covnert automatically to very large sized types (LOB, CLOB. RAW, etc.)
+- Very large types will generally not automatically convert to each other (ex. from BLOB to CLOB)
+
+***** EXPLICIT CPNVERSION ******
+- easy to read
+- result in better performance (implicit conversion usullly longer processing time)
+- recommended to use 
+  
