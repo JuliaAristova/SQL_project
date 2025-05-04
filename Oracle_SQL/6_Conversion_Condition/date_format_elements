@@ -1,0 +1,53 @@
+DATE FORMAT ELEMENTS
+
+AD/A.D.     Anno Domini or Before Christ indicator, with or without periods
+BC/B.C.
+AM/A.M.     morning or afternoon hours, with or without periods
+PM/P.M.
+CC/SCC      Century
+D           Day of the week, 1 through 7
+DAY         The name of the day spelled out
+DD          Day of the month, 1 through 31
+DDD         Day of the year, 1 through 366
+DL          Long date format, as determined by the NLS_DATE_FORMAT parameter. The appearance is determined
+            by NLS_TERRITORY and NLS_LANGUAGE parameters.(AMERICAN_AMERICA --> "Saturday, July 27, 2019")
+DS          Short date format, as determined by the NLS_DATE_FORMAT parameter. The appearance is determined
+            by NLS_TERRITORY and NLS_LANGUAGE parameters.(AMERICAN_AMERICA --> "7/27/2019") 
+DY          Abbreviated neme of day (SUN, MON, TUE...)
+E           Abbreviated era name
+EE          Full era name
+FF          Fractional seconds
+FM          Used in combination with other elements to direct the suppression of leading or trailing blanks.
+FX          Exact matching between the character data and the format model
+HH, HH12    Hour of the dat, 1 through 12 (12 midnight is represented as 12)
+HH24        Hour of the day, 1 through 24 (12 midnight is represented as 00)
+IW          Week of the year, 1 through 53
+I, IY, IYY  Last one, two, or three digits of the ISO year
+J           Julia day, counted as the number of days since January 1, 4712 B.C.
+MI          Minute, 0 through 59
+MM          Month in double digits, 01 through 12
+MON         Abbreviated name of month (JAN, FEB, MAR...)
+MONTH       Name of month spelled out
+PR          If negative, number is enclosed in brackets (<>). If positive, returned with leading and trailing spaces: PR follows specification (9999PR)
+Q           Quarter of year
+RM          Roman numeral month
+RR          Accept 20-century dates in the 21-century using only 2 digits (00-49 interpreted as 2000-2049; 50-99 interpreted as 1950-1999)
+RRRR        4-digit year, If provided 2-digit year, it returns the same value as RR
+SS          Seconds, 0 through 59
+SSSS        Seconds past midnight, 0 through 86399
+TS          Short time format, allowed only when specified with Dl or DS format model element separated by white space
+TZD         Abbreviated time zone with daylight saving time. Valid only in timestamp and interval formats (EST, GMT)
+TZH         Time sone hour. Not valid in DATE datatypes. Valid only in timestamp and interval formats, 00 through 12
+TZM         Time zone minute.  Valid only in timestamp and interval formats, 00 through 59
+TZR         Time zone region format. Not valid in DATE datatypes. Valid only in timestamp and interval formats, America/Los_Angeles
+WW          Week of the year. 1 through 53, week 1 starts on the first day of the year and ends on the sevents day of the year
+W           Week of the month, 1 through 5,  week 1 starts on the first day of the month and ends on the sevents day of the month
+X           Local radix caracter. used in numeric representation to separate an integer from its fractional part (17.2 - dot)
+Y,YYY       Year woth comma in position
+YEAR, SYYY  Year spelled in English (SYYY - BC dates displayed wit a minus sign prefix)
+YYY, YY, Y  Last 3, 2, 1 digit of the year
+- / , . ; : Punctuation that is accepted in place and passed as is
+"text"      Literal value. Display as is
+
+
+  
