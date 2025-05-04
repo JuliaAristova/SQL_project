@@ -4,11 +4,6 @@ e1 - expression, required
 format_model - optional
 nls_pattern - optional, NLS parameters
 
->>> NLS PARAMETERS
-NLS_NUMERIC_CHARACTER = 'dg'  d - deciaml character; g - group separator)
-NLS_CURRENCY = 'text'         text = local currency symbol
-NLS_ISO_CURRENCY = 'currency' currency = international currency symbol
-
 Example: transfor character to number
 SELECT TO_NUMBER('$17,000.23', '$999,99.99)       # 17000.23  - number
 FROM DUAL;
