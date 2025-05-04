@@ -4,28 +4,6 @@ e1 - expression, required
 format_model - optional
 nls_pattern - optional, NLS parameters
 
->>> NUMBER FORMAT ELEMENTS
-
-, .      will pass where they are included (only one oeiod is allowed)  9,999.99
-$        Leading dollar sign  $999.99
-0        Leading or trailin zero  0099.99
-9        Any digit  999
-B        Leading blank for integers  B999
-C        ISO currency symbol as defined in NLS_ISO_CURRENCY parameter  C999
-D        Returns the currend decimal character as defined by the NLS_NUMERIC_CHARACTERS parameter (default - period) 999D99
-EEEE     Returns value of scientific notation  9.9EEE
-G        Returns the group separator (ex., comma)  9G999
-L        Returns the local currency symbol  L999
-MI       Returns negative value with trailing minus sign, positive - with a trailing blan  999MI
-PR       Returns negative values in angle brackets (999PR)
-RN, rn   Returns value in Roman numerals, uppercase (RN), lowercase (rn)  
-$(prefix) Returns negative values with a leading minus sign, positive - with leading positive sign $999
-$(suffix) Returns negative values with a trailing minus sign, positive - with trailing positive sign 999$
-TM       Text minimum - Retruns the smallest number of characters possible
-U        Returns Euro currency symbol or whatever indicated  by NLS_DUAL_CURRENCY parameter  U999
-V        Returns a value multiplied by 10n, where n is the number of 9s after V  999V99
-X        Returns Hexadecimal value  XXXX
-
 >>> NLS PARAMETERS
 NLS_NUMERIC_CHARACTER = 'dg'  d - deciaml character; g - group separator)
 NLS_CURRENCY = 'text'         text = local currency symbol
