@@ -1,0 +1,5 @@
+>>> NLS PARAMETERS
+
+NLS_NUMERIC_CHARACTER = 'dg'  d - deciaml character; g - group separator)
+NLS_CURRENCY = 'text'         text = local currency symbol
+NLS_ISO_CURRENCY = 'currency' currency = international currency symbol
