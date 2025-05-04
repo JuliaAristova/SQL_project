@@ -1,0 +1,5 @@
+TO_DATE(c, format_model, nls_parms) - transforms value of c into valid DATE data type
+  c - character string, requiered
+  format-model, nls_parms - optional
+
+SELECT TO_DATE('2016-01-31', 'RRRR-MM-DD') FROM DUAL;    # 31-JAN-16
