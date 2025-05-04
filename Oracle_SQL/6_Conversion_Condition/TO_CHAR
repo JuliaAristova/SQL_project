@@ -1,0 +1,24 @@
+TO_CHAR - converts data from various data types to character data (overloaded function)
+
+>>> TO_CHAR - character
+
+TO_CHAR(c) - transforms c to VARCHAR2. c - NCHAR, NVARCHAR2, CLOB, NCLOB.
+
+SELECT TO_CHAR('Hello') FROM DUAL;
+
+>>> TO_CHAR - number 
+
+TO_CHAR(n, formt_model, nls_parms) - transforms number into character string, formating special character as defined.
+      n - number, required
+      format_model - number format elements, optional
+    SELECT TO_CHAR(198, '$999.99') FROM DUAL;    # $198.00
+
+>>> TO_CHAR - date
+
+TO_CHAR(d, format_model, nls_parms)
+  d - date, required
+  format_model - optional
+
+SELECT TO_CHAR(SYSDATE, 'FMDay, "the" Ddth "of" Month, RRRR') FROM DUAL; # Wednesday, the 4th of May, 2025
+
+SELECT TO)CHAR(SYSDATE, 'HH24:MI:SS AM') FROM DUAL; # 17:49:16 PM
