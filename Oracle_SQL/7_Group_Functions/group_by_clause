@@ -1,0 +1,22 @@
+GROUP BY - optional clause in SELECT (does not exist in any other statements)
+Purpose: group sets of rows and treat each individual set as a whole.
+
+SELECT room_style, ROUND(AVG(sq_ft), 2)
+FROM ship_cabins
+WHERE ship_id = 1
+GROUPING BY room_style;      # group the rows that have the same value for room_style and compute the average for each group
+
+GROUP BY:
+- can specify any number of valid expressions, including columns of the table
+- generally used to specify the columns that will contain common data in order to group rows together for performing some aggregations
+- Select list can have only expressions that specified in GROUP BY and aggregate functions applied to those expressions
+- Select list may not have expression specified in GROUP BY
+
+SELECT room_type,
+       TO_CHAR(AVG(sq_ft), 2), '999,999.99) "Average sq ft",
+       MAX(guests) "Maximum # of guests",
+       COUNT(ship_cabin_id) "Total # of cabins"
+FROM ship_cabins
+WHERE ship_id = 1
+GROUPING BY room_type
+OREDR BY 2 DESC;
