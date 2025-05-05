@@ -1,0 +1,39 @@
+Group functions process ZERO or MORE ROWS as a logical set, analyzed together to return a SINGLE_ROW RESULT.
+Group finctions = Multirow functions/
+
+- Aggregate functions: scan a set of rows and returns a single answer for all of them.
+- Analytical functions - process a set of rows or subsets (sometimes overlaping).
+
+Many group functions can be used as aggregate and analytical based on syntax.
+- accept input of sprcific type
+- return output of specific data type (can differ from data type of input)
+
+Group functions must be treated separatel from scalar functions (different level of granularity).
+Can be neseted ROUND(AVG(price)) or AVG(ROUND(price))
+
+Can be called from:
+- SELECT statement select list
+- ORDER BY clause
+- GROUP BY
+- HAVING
+
+
+--------------------------------------------------------------------------------------------------------------------
+Function                           Description                                           Aggregate          Analytic
+--------------------------------------------------------------------------------------------------------------------
+Count, Sum, Avg                    The more commonly used aggegate functions              Yes                Yes    
+Min, Max, Median
+--------------------------------------------------------------------------------------------------------------------
+Variance, Var_pop, Var_Samp,       Variance and standard deviation, with options          Yes                Yes
+Covar_Samp, Stddev, Stddev_pop,    for population standard deviation and cummulative
+Stddev_Samp                        standard deviation
+--------------------------------------------------------------------------------------------------------------------
+Rank, Dense_Rank, Persent_Rank,    Ranking functions and associated keywords              Yes                Yes
+PErcentile_Count, Percentile_Disc,
+Cume_Dist, First, Last
+--------------------------------------------------------------------------------------------------------------------
+Group_Id, Groupijg, Grouping_Id    Grouping features for use wit GROUP BY ...              Yes               No
+                                   ROLLUP and CUBE 
+--------------------------------------------------------------------------------------------------------------------
+
+
