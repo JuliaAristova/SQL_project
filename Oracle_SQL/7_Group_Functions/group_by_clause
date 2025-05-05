@@ -20,3 +20,37 @@ FROM ship_cabins
 WHERE ship_id = 1
 GROUPING BY room_type
 OREDR BY 2 DESC;
+
+***** MULTIPLE COLUMNS *****
+
+SELECT room_style,
+       room_type.
+       TO_CHAR(MIN(sq_ft), '9,999') "Min",
+       TO_CHAR(MAX(sq_ft), '9,999') "Max",
+       TO_CHAR(MIN(sq_ft) - MAX(sq_ft), '9,999') "Diff
+FROM ship_cabins
+WHERE ship_id = 1
+GROUP BY room_style, room_type                              #first, group by style, then by room type
+ORDER BY 3;
+
+***** ORDER BY *****
+
+The list of columnns, expressions in ORDER BY that is a part of SELECT statement that uses GROUP BY is limited to:
+- expressions specified in the GROUP BY clause
+- expressions specified in SELECT lest, referenced by position, name, or alias
+- aggregate functions, regardless of whether the aggregate function is specified elsewhere in the SELECT statement
+- the functions USER, SYSDATE, anad UID
+
+***** NESTING FUNCTIONS *****
+
+Scalar functions can be nested multiple times, as long as the data types match. (same level of details)
+
+Aggregate functions combine data from multiple rows into a single row (different level of details).
+With GROUP BY - we have subsets of data
+
+- you are allowed to nest aggregate functions up to two levels deep
+- each time you introduce an aggregate function, you are rolling up lower-level data into higher-level summary data.
+- your SELECT statement's select list must always respect the level of aggregation and can only include expressions
+that are all at the same level of aggregation.
+
+
