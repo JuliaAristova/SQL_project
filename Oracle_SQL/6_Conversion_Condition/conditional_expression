@@ -1,0 +1,56 @@
+Conditional expression evaluates data at the time of code execution and cange te code's logical approach to processing
+based on certain values of data at a run time.
+
+***** CASE *****
+
+  CASE expression_1
+    WHEN condition_1  THEN result_1        # required
+    WHEN condition_2  THEN result_2        # optional
+   ELSE result_final                       # if no comparison pair matched 
+  END
+
+  SELECT ship_name,
+         capacity,
+         CASE capacity 
+            WHEN 2052  THEN 'Medium'
+            WHEN 2974  THEN 'LArge'
+         END as cabin_size
+FROM ships
+WHER ship_id <= 4;
+
+***** DECODE *****
+Often referred to as IF_THEN_ELSE
+  
+  DECODE(e, search_expression. d)        
+    e - expression, requireds
+    search_expression - series of pairs of expressions separated by commas, required, 
+    d - expression, optional; 
+
+  SELECT state, DECODE(STATE, 'CA', 'California',          # if e equals s1 then return e1
+                              'IL', 'Illinois',            # if e equals s2 then return e2
+                              'Other') AS decoded_state    # else return d, if omitted return NULL
+
+
+  ***** NVL *****
+
+    NVL(e1, e2) - if e1 is NULL, then returns value of e2, oterwise returns e1  
+      e1, e2 - expressions, same data types (capable to be autoconverted), required
+
+   In mathematical calculation, if one of the values is NULL - result will be automatially NULL.
+   NVL() can be used to substitute NULL for   zero.
+
+  SELECT sq_ft + NVL(balcony_sq_ft, 0) FROM ship_cabins;
+  FROM addresses;
+
+  ***** NULLIF *****
+
+    NULLIF(e1, e2) - if e1 and e2 are the same returns NULL, oterwise returns e1  
+      e1, e2 - expressions, same data types (capable to be autoconverted), required
+
+  Good for comparing multiple rows wherein an older and newer version of a particular value exists and you want to update.
+
+  SELECT test_score, 
+         updated_test_score, 
+         NULLIF(updated_test_score, test_score) revision_only
+ FROM scores;
+
