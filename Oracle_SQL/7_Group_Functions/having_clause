@@ -1,0 +1,18 @@
+HAVING clause 
+- can exclude specific groups of rows defined in the GROUP BY clause
+- is unique for SELECT statement
+- performs the same function for GROUP BY that WHERE performs for the rest of the SELECT statement
+- defines the criteria upon which each of the GROUP BY groups will be included or excluded
+- allowed only if GROUP BY iss present (HAVING may be before or after GROUP BY)
+- can use boolean operators (AND, OR, NOT)
+- can only compare expressions that reference groups as defined in GROUP BY clause and aggregate functions
+- must follow WHERE (if present)< and precede ORDER BY (if present)
+
+SELECT room_style,
+       room_type,
+       TO_CHAR(MIN(sq_ft), '9,999') "Min,
+FROM ship_cabins
+GROUP BY room_style, room_type
+HAVING room_type IN('Standard', 'Large') OR MIN(sq_ft) > 1200
+ORDER BY 3;
+  
