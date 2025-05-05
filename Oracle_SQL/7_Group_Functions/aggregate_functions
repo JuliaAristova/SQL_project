@@ -1,0 +1,51 @@
+***** COUNT *****
+
+COUNT(e1) - return number of occurence of non-NULL values.
+
+SELECT COUNT(vendor_name),     # 2
+       COUNT(status),          # 1
+       COUNT(category)         # 0
+FROM vendors;
+
+SELECT COUNT(*) FROM vendors;  # 2 - return number of all rows, includes the rows with NULL values
+
+Can be used with DISTINCT(Unique occurence) and ALL (default)  # cannot be used with *
+
+SELECT COUNT(ALL last_name),
+       COUNT(DISTINCT last_name)
+FROM employees;
+
+***** SUM *****
+
+SUM(e1) - adds numeric values in a given column
+  e1 - only numeric data types
+  SELECT SUM(subtotal) FROM orders;
+
+***** MIN and MAX *****
+
+MIN(e1), MAX(e1) - return single min/max value
+  e1 - expression with a data type of character, date, or number.
+
+NUMBER: low number is MIN, high number is MAX
+DATE: earlier dates are MIN, later dates are MAX.
+Character: A < Z, Z , a, '2' > '100', '1' < '10'
+
+NULL values are ignores, unless all values are NULL (then MIN/MAX return NULL)
+
+***** AVG *****
+
+AVG(e1) - computes the average value for a set of rows.
+  e1 - only numeric 
+  Ignores NULL
+  Can be used with DISTINCT and ALL
+
+SELECT AVG(salary) FROM pay_history;                                    # 58875.16666666666666666666666666666667
+SELECT ROUND(AVG(salary), 2) FROM pay history;                          # 58875.17
+SELECT TO_CHAR(ROUND(AVG(salary), 2, '$999,999.99) FROM pay history;    # $58,875.17
+
+***** MEDIAN *****
+
+MEDIAN(e1)  - sorts data, returns the middle value (if odd numbr of values) or 
+              interpolated value from within the middle.
+  e1 - expression with numeric or date data types
+  Ignores NULL
