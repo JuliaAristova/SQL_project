@@ -1,0 +1,65 @@
+***** RANK: Analytic *****
+
+RANK() OVER (PARTITION BY p1 ORDER BY ob1) - calculates the rank of a value within a group of values.
+  p1 - partition, optional
+  ob1 - expression, required
+
+- rank may bnot be consencutive numbers (because of a tied rows)
+
+SELECT ship_cabin_id, room_style, sq_ft,
+        RANK() OVER(PARTITION BY room_style ORDER BY sq_ft) AS sq_ft_rank  # when a new room style starts< rank value restarts
+FROM ship_cabins
+WHERE chip_cabin_id <= 7
+ORDER BY sq_ft;
+
+***** RANK: Aggregate *****
+
+RANK(c1) WITHIN GROUP (ORDER BY e1)  - for eech c1 you have corresponding e1
+  c1, e1 - expressions
+
+SELECT RANK(533) WITHIN GROUP (ORDER BY sq_ft)
+FROM ship_cabins
+WHERE ship_cabin_id <= 7
+ORDER BY sq_ft;
+
+*****DENSE_RANK: A *****
+
+DENSE_RANK() OVER (PARTITION BY p1 ORDER BY ob1) - calculates the rank of a value within a group of values.
+  p1 - partition, optional
+  ob1 - expression, required
+
+When a tie is encountered, the same value is assigned to each equivalent value; then next value gets the next sequential number (no gaps).
+
+SELECT ship_cabin_id, room_style, sq_ft,
+        DENSERANK() OVER(PARTITION BY room_style ORDER BY sq_ft) AS sq_ft_rank  # when a new room style starts< rank value restarts
+FROM ship_cabins
+WHERE chip_cabin_id <= 7
+ORDER BY sq_ft;
+
+***** DENSE_RANK: Aggregate *****
+
+DENSE_RANK(c1) WITHIN GROUP (ORDER BY e1)  - for eech c1 you have corresponding e1
+  c1 - constant, numeric or character
+  e1 - expression with a data type matching the corresponding c1 data type
+
+***** FIRST & LAST *****
+
+aggregate_function KEEP (DENSE_RANK FIRST ORDER BY e1)
+aggregate_function KEEP (DENSE_RANK LAST ORDER BY e1)\
+
+For a given range of sorted values, each returns the first / last value of the population of rows defining e1, in the sorted order.
+
+# display the highest number of square feet fro any and all cabins that accomodate the lowest number of guests.
+
+SELECT MAX(sq_ft) KEEP (DENSE_RANK FIRST ORDER BY guests) "Largest"
+FROM ship_cabins'
+1 - sorting table by column guests identifying the FIRST (lowest values)
+2 - for all rows withh lowest Guest value, determin the MAX(sq_ft)
+
+SELECT RANK(533) WITHIN GROUP (ORDER BY sq_ft)
+FROM ship_cabins
+WHERE ship_cabin_id <= 7
+ORDER BY sq_ft;
+
+
+
