@@ -1,0 +1,15 @@
+***** USING *****
+
+- similar to Natural Join (identically named columns are required)
+- can be used with inner and outer joins
+- table name prefix is not allowed befpre any colimn name
+
+SELECT employee_id, last_name, street_address
+FROM employee 
+LEFT JOIN addresses                        # OUTER - optional, omitted
+USING (employee_id);
+
+SELECT employee_id, last_name, street_address
+FROM employee 
+LEFT JOIN addresses
+USING (employee_id, office_name); # combinations is used
