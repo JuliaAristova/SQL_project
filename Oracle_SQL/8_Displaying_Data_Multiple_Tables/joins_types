@@ -1,0 +1,19 @@
+Join - is a SELECT statement that retrieves data from 2+ tables and connects that data to return a merged set of rows. 
+Tables must share common data elements that support joins (related to each other).
+
+Types of joins:
+
+>>> INNER JOIN & OUTER JOIN
+
+- inner joins - connect rows in two or more tables if and only if there are matched rows in all the tables being joined.
+- outer joins - connect rows in two or more tables in a way that is more inclusive - 
+                if data exists in one table that has no matching values in another. 
+                The unmatched row will still be included in the output.
+
+>>> EQUIJOIN & NON-EQUIJOIN
+
+- equijoins - connect data in two or more tables by looking for common data among the tables' column (exact match of data).
+- non-equijoins - connect data by looking for relationship that don't involve equality 
+                  (less than, greater than relationship, or range).
+
+>>> Other: self joins, natural joins.
