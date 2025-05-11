@@ -1,0 +1,9 @@
+***** MULTITABLE JOINS *****
+
+SELECT p.port_name, s.ship_name , sc.room_number
+FROM ports p
+JOIN ships s ON p.port_id = s.home_port_id
+JOIN ship_cabins sc ON s.ship_id = sc.chip_id;
+
+Query that joins too manytables introduces performance and maintenance challenge.
+Limit to 5 joins in one query
