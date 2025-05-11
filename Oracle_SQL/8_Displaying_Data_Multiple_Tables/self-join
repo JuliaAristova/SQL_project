@@ -1,0 +1,23 @@
+***** SELF-JOIN *****
+
+- table is joined to itself
+- the value in a column of a table compares to the value within another column in the same table
+- returns 1+ rows from a table that are merged with other rows in the same table based on the join criteria
+- can be inner or outer joins
+- can be equijoins or non-equijoins
+- FK is advised but not required to perform self-join
+
+Table: Positions
+Columns:
+  position_id
+  position
+  reports_to --> position_id
+
+1. Identify the table twice in FROM clause
+2. Define join criteria (OUTER - to include the highest-level position that does not have report_to value)
+3. Apply table alias to all appropriate references
+
+SELECT a.position_id, a.position, b.position AS BOSS
+FROM positions a 
+LEFT OUTER JOINS positions b
+ON a.position_id = b.position.id;
