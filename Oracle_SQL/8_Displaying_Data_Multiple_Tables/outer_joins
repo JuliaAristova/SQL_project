@@ -1,0 +1,53 @@
+***** OUTER JOIN *****
+
+Returns all the same data as an inner join but also returns additional rows that don't have matches in
+all tables that are joined together.
+
+>>> LEFT OUTER JOIN
+
+SELECT ship_id, ship_name, port_name
+FROM ships 
+LEFT [OUTER] JOIN ports ON home_port_id = port_id    # OUTER - optional
+ORDER BY ship_id;
+
+- returns all ship_id even if there is no corresponding port_name (no matching home_port_id in ports)
+
+>>> RIGHT OUTER JOIN
+
+SELECT ship_id, ship_name, port_name
+FROM ships 
+RIGHT [OUTER] JOIN ports ON home_port_id = port_id    # OUTER - optional
+ORDER BY ship_id;
+
+- returns all port_name even if there is no corresponding ship_name (no matching port_id in ships)
+
+>>> FULL OUTER JOIN
+
+SELECT ship_id, ship_name, port_name
+FROM ships 
+FULL [OUTER] JOIN ports ON home_port_id = port_id    # OUTER - optional
+ORDER BY ship_id;
+
+- combines result LEFT and RIGHT JOINs
+
+***** ORACLE OUTER JOIN SYNTAX *****
+
+SELECT ship_id, ship_name, port_name
+FROM ships, ports
+WHERE home_port_id = port_id(+)    # LEFT OUTER JOIN, but(+) is on the right side  
+ORDER BY ship_id;
+
+SELECT ship_id, ship_name, port_name
+FROM ships, ports
+WHERE home_port_id(+) = port_id    # RIGHT OUTER JOIN, but(+) is on the leftt side
+ORDER BY ship_id;
+
+>>> FULL OUTER JOIN 
+SELECT ship_id, ship_name, port_name
+FROM ships, ports
+WHERE home_port_id = port_id(+)  
+UNION
+SELECT ship_id, ship_name, port_name
+FROM ships, ports
+WHERE home_port_id(+) = port_id  
+ORDER BY ship_id;
