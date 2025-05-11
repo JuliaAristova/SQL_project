@@ -1,0 +1,29 @@
+***** INNER JOINS *****
+
+returns  a merged row from two or more tables if and only if there ate matched values among all joined tables.
+
+- identify both tables in the FROM clause separated by the keywords INNER JOIN
+- define the column from each table that is being used to join the data in the ON condition.
+
+  SELECT ship_id, ship_name, port_name
+  FROM ships 
+  [INNER] JOIN ports ON home_port_id = port_id          # INNER - optional
+  #WHERE port_name = 'Charleston'
+  ORDER BY ship_id;
+
+>>> Old Syntax - works, but inconsistent with ANSI standards.
+
+SELECT s.ship_id, s.ship_name, p.port_name
+FROM ships s, port p 
+WHERE s.home_port_id = p port_id
+#AND port_name = 'Charleston'
+ORDER BY ship_id;
+
+>>> Using Table Aliases
+
+When writing any query in which a column reference is ambiguous, you must identify the column clearly using 
+- a table prefix or 
+- a table alias. 
+Otherwise -  an error message and the SQL statement won't execute.
+
+Table aliases can be used in SELECT, INSERT< UODATE< MERGE, and DELETE statements.
