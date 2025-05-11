@@ -1,0 +1,24 @@
+***** NATURAL JOINS *****
+
+Good design to give identical names to any column that will be linked.
+
+- identically named columns are required
+- SQL locates any columns in the two tables with a common name, and uses them to join the tables
+- inner join by default
+- can also be a left / right / full outer join
+- no ON
+- prefix is not allowed on joining columns (allowed on other columns)
+
+SELECT employee_id, last_name, street_address    # employee_id cannot use prefix
+FROM employee 
+NATURAL JOIN addresses;                          # both tables employee and addresses have employee_id column
+
+SELECT employee_id, last_name, street_address
+FROM employee 
+NATURAL LEFT OUTER JOIN addresses;
+
+NOTE: if there is a column (not joining) with the same name (no prefix) in both tables:
+- Inner Join & Left outer join --> value from the left table
+- Right outer join --> value for the right table
+- full outer --> value from combination of the tables
+
