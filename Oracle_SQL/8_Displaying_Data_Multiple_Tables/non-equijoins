@@ -1,0 +1,16 @@
+***** NON-EQUIJOINS *****
+
+Non-equijoins relate one row to another by way of non-equal comparisons 
+(less than, greater than, comparison in a range of values).
+
+Tables:
+SCORE: score_id (PK), test_score, updated_test_score	--> actual scores on exam
+
+GRADING: grading_is (PK), grade, score_min, score_max;  --> grading criteria ( grade - A, score_min - 90l, score_max - 100)
+
+SELECT s.score_id, s_test_score, g.grade
+FROM scores s 
+JOIN grading g ON s.test_score BETWEEN s.score_min and g.score_max;
+
+- syntax is similar to WHERE clause 
+Tables do not have FK relationship
