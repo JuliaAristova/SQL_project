@@ -1,0 +1,72 @@
+Conditional multitable insert statemenr use conditional logic to determine which INTO clause(s) to process.
+Each row returned by the subquery is processes through a series of one or more WHEN conditions.
+Each WHEN condition is followed by a set of one or more INTO clases.
+
+- for each row returned by the subquery, WHEN is evaluated 
+  - if true - set of one or more INTO clauses is executed
+  - if false - set of one or more INTO clauses is skipped, and the next WHEN is evaluated
+- optional ELSE (after all WHEN/INTO)  defines its own set of one or more INTO clauses --> processes if all WHEN are skipped
+
+Tables:
+- invoices
+- invoices_archived (invoices older than one year)
+- WO_INV - third party information
+
+Task: integrating data from another application
+- pull data from WO_INV
+- insert  WO_INV's invoice information within the past year into invoices table
+- insert WO_INV's invoice information that is more than a year old into invoices_archived
+
+INSERT FIRST
+  WHEN (date_shipped < (ADD_MONTH(SYSDATE, -12)))   THEN
+      INTO invoices_archived (invoice_id, invoice_date, shipping_date, account_number)
+      VALUES                 (inv_no, date_entered, date_shipped, cust_acct)
+  ELSE
+      INTO invoices (invoice_id, invoice_date, shipping_date, account_number)
+      VALUES                 (inv_no, date_entered, date_shipped, cust_acct)
+ SELECT inv_no, date_entered, date_shipped, cust_acct
+ FROM WO_INV;
+
+
+- subquery - date_shipped
+- WHEN compares date_shipped value 
+- if WHEN returns true - data is inserted into invoice_archived table
+- ELSE executed if WHEN returns false
+
+
+INSERT                                                                           # statement will default to 'ALL' - each and every WHEN that is true will be executed
+  WHEN (TO_CHAR(date_shipped, 'RRRR') < = '2019')   THEN
+      INTO invoices_through_2019 (invoice_id, invoice_date, shipping_date, account_number)
+      VALUES                     (inv_no, date_entered, date_shipped, cust_acct)
+  WHEN (TO_CHAR(date_shipped, 'RRRR') < = '2018')   THEN                         # WHEN with 2 insertion when True
+      INTO invoices_through_2018(invoice_id, invoice_date, shipping_date, account_number)
+      VALUES                     (inv_no, date_entered, date_shipped, cust_acct)
+      INTO invoices_closed (invoice_id, invoice_date, shipping_date, account_number)
+      VALUES               (inv_no, date_entered, date_shipped, cust_acct)
+  WHEN (TO_CHAR(date_shipped, 'RRRR') < = '2017')   THEN
+      INTO invoices_through_2017 (invoice_id, invoice_date, shipping_date, account_number)
+      VALUES                     (inv_no, date_entered, date_shipped, cust_acct)
+SELECT inv_no, date_entered, date_shipped, cust_acct                            # there is no ELSE --> nothing will be executed for the row that does not match any WHEN 
+FROM WO_INV;
+
+>>> ALIASES
+
+Table aliases are not recognizable. Use column aliases
+
+INSERT 
+  WHEN (boss_salary - employee_salary < 10000) THEN
+    INTO salary_chart (emp_title, superior, emp_income. sup_income)
+    VALUES            (employee, boss, employee_salary, boss_salary)
+SELECT a.position_employee employee,
+       b.position_boss     boss,
+       a.max_salary        boss_salary,
+FROM positions a 
+     JOIN position b ON a.reports_to = b.position_id
+WHERE a.max_salary > 100000; 
+
+
+
+
+
+
+
