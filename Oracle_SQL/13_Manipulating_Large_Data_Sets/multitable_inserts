@@ -1,0 +1,45 @@
+Multitable Inserts tasks:
+- query data from one table and inserts the data into multiple tables with conditional logic
+  (ex., transforming data into a series of archive tables)
+- exchange data between two similar systems of different requirements 
+   (ex., transaction-based application and a data warehouse optimized for analysis)
+- support logical archiving at any level of detail with logical decision points embedded in the INSERT statement
+- Integrate complex queries with GROUP BY, HAVING, set operators, while moving any number of rows dynamically,
+  distributing output into multiple data targets, and programming logical decision points to control data distribution.
+- transform data that is stored in rows and levels into a cross-distribution output
+
+Multitable Inserts Types:
+- Unconditional multitable INSERT statements process each of the INSERT statement's one or more INTO clauses
+  without condition, for all rows returned by the subquery.
+- Conditional multitable INSERT statements use WHEN conditions before INTO clausees to determine whether the given 
+  INTO clause(s) will execute fir a given row returned by the subquery; optional ELSE clause can include an alternative
+  INTO clause that can be executed if none of the WHEN conditions is true.
+
+Multitable INSERT always uses a subquery (may return 0+ rows)
+>>> Unconditional multitable INSERT
+
+  INSERT ALL                                # ALL - required
+    INTO table_1 VALUES (col1_list1),       # at least 1 INTO - required
+    INTO table_2 VALUES (col1_list1),       # each VALUES - optional (if omitted, the select list from the subquery will be used)
+    INTO table_3 VALUES (col1_list1)
+  ...
+  subquery;                                 # SELECT statement that can stand alone
+
+  >>> Conditional multitable INSERT
+
+  INSERT option                            # option - ALL (default, may be omitted) or FIRST (only first WHEN that is true in inserted)
+    WHEN expression THEN
+      INTO table_1 VALUES (col1_list1),     # each INTO may have its own VALUES (if omitted subquery's select - data types matches)  
+    WHEN expression THEN                    # may be multiple WHEN followed by 1+ INTO 
+      INTO table_2 VALUES (col1_list1)      # tab and col_list will executed when WHEN is true
+    ...
+    ELSE                                    # ELSE ... INTO - optional, must be the last
+      INTO table_3 VALUES (col1_list1)
+   subquery;                                 # SELECT statement that can stand alone
+
+   - processes each row returned by the subquery
+   - precesses WHEN ... INTO
+     - if ALL is specified: all true WHEN go to corresponding INTO
+     - if FIRST is specified: for each row returned by the subquert WHEN is avaluated, as soon as it is
+                              evaluated to TRUE, the corresponding set of INTO(s) is executed, then processing 
+                              moves to the next row returned by tge subquery.
