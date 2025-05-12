@@ -1,0 +1,42 @@
+Tables (same columns):
+- cruise_orders
+- CO_2018
+- CO_Elcaro
+- CO_archived
+
+Example: SQL statement queries cruise_orders and insert the putput to each of 3 archive tables
+
+INSERT ALL
+  INTO CO_2018      (cruise_order_id, order_date, cruise_customer_id, ship_id)
+  VALUES            (cruise_order_id, order_date, cruise_customer_id, ship_id)
+  INTO CO_Elcaro    (cruise_order_id, order_date, cruise_customer_id, ship_id)
+  VALUES            (cruise_order_id, order_date, cruise_customer_id, ship_id)
+  INTO CO_Archived  (cruise_order_id, order_date, cruise_customer_id, ship_id)
+  VALUES            (cruise_order_id, order_date, cruise_customer_id, ship_id)
+SELECT               cruise_order_id. order_date. cruise_customer_id, ship_id 
+FROM cruise_orders;
+
+- if subquery returns 3 row --> result of the INSERT - 9 rows in total (3 rows in 3 tables)
+- VALUES specifies expression fount in the subquery's select list
+- each VALUES expression list may use any complex expression in specifying the value to be inserted into
+  its corresponding table and column.
+
+INSERT ALL
+  INTO CO_2018      (cruise_order_id, order_date, cruise_customer_id, ship_id)
+  VALUES            (cruise_order_id, SYSDATE, 14, 1)                          
+  INTO CO_Elcaro    (cruise_order_id, order_date + 30, 15, 1)
+  VALUES            (cruise_order_id, order_date, cruise_customer_id, ship_id)
+  INTO CO_Archived  (cruise_order_id, order_date, cruise_customer_id, ship_id)
+  VALUES           (cruise_order_id, order_date, cruise_customer_id, ship_id)
+SELECT cruise_order_id. order_date. cruise_customer_id, ship_id 
+FROM cruise_orders;
+
+# all order_date in CO-2018 will be SYSDATE,
+  cruise_custome_id - assigned literal value 14
+  ship_id - assigned literal value 1
+
+- If the VALUES list is omitted, the columns of the subquery become VALUES list 
+  and must match in number and in data type (or convertable)
+- If there is no column list in the INTO clause, the subquery's select list must match
+  the columns in the table of the INTO clause/
+
