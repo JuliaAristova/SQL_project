@@ -1,0 +1,64 @@
+TASK: Tranform data from a spreadsheet structure to a rows-and-column structure.
+Move data tp ship_cabin_statistics table
+
+Spreadsheet:
+
+ROOM_TYPE      OCEAN          BALCONY          No_Window
+--------------------------------------------------------------
+Royal          1745            1635
+SKYLOFT        722             722
+PRESIDENTIAL   1142            1142            1142
+LARGE          225                             211
+STANDARD       217              554            586
+
+stored in external table -->  
+ship_cabin_grid
+------------------------------------------
+room_type          VARCHAR(20 BYTE)
+OCEAN              NUMBER
+BALCONY            NUMBER
+NO_WINDOW          NUMBER
+
+
+ship_cabin_statistics
+sc_id              NUMBER(7)
+room_type          VARCHAR(20 BYTE)
+window_type        VARCHAR(10 BYTE)
+sq_ft              NUMBER(8)
+
+===============================================================
+INSERT ALL
+  WHEN OCEAN IS NOT NULL THEN
+     INTO ship_cabin_statistics (room_type, window_type, sq_ft)
+     VALUES                  (room_type, 'OCEAN', OCEAN)
+  WHEN BALCONY IS NOT NULL THEN
+     INTO ship_cabin_statistics (room_type, window_type, sq_ft)
+     VALUES                  (room_type, 'BALCONY', BALCONY)
+  WHEN NO_UNDOW IS NOT NULL THEN
+     INTO ship_cabin_statistics (room_type, window_type, sq_ft)
+     VALUES                     (room_type, 'NO WINDOW', NO_WINDOW)
+SELECT ROWNUM RN, ROOM_TYPE, OCEAN, BALCONY, NO_WINDOW
+FROM ship_cabin_grid
+
+- for each row of the ubquery is considered 3 times (each column is individually considered 
+
+===============================================================
+to see the result:
+SELECT room_type, window_type, sq_ft
+FROM ship_cabin_statistics
+ORDER BY room_type, window_type;
+
+room_type        window_type      sq_ft
+LARGE            NO_WINDOW        211
+LARGE            OCEAN            225
+PRESIDENTIAL     BALCONY          1142
+PRESIDENTIAL     NO_WINDOW        1142
+PRESIDENTIAL     OCEAN            1142
+ROYAL            BALCONY          1635
+ROYAL            OCEAN            1745
+SKYLOFT          BALCONY          722
+SKYLOFT          OCEAN            722
+STANDARD         BALCONY          554
+STANDARD         NO_WINDOW        586
+STANDARD         OCEAN            217
+  
