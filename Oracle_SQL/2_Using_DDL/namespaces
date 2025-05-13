@@ -1,0 +1,24 @@
+***** Namespaces *****
+
+A namespace is a logical boundary within the DB that encompasses a particular set of DB objects. 
+There are several namespaces at work at any given time.
+
+You must provide unique names  for an object within its own namespaces/
+Objects that share a namespace must have unique names within that namespace.
+Object in different namespaces are allowed to have identical names.
+
+Example:
+
+DB:
+Schema 1 - Namespace (Constraints)
+           Namespace (Indexes)
+           Namespace (Tables, Views, Sequences, Private Synonyms, User-Defined Types)
+           Namespace (Users, Roles)
+Schema 2 - Namespace (Constraints)
+           Namespace (Indexes)
+           Namespace (Tables, Views, Sequences, Private Synonyms, User-Defined Types)
+           Namespace (Public Synonymes)
+
+you can create Work_Schedule table in both schemas
+you cannot create Work_Schedule TABLE and Work_Schedule VIEW in the same schema, 
+you can create a Work_Schedule TABLE and Work_Schedule CONSTRAINT, and INDEX, and Role in the same schema
