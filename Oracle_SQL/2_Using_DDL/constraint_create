@@ -1,0 +1,82 @@
+***** CREATE CONSTRAINT *****
+
+You create a constraint as a part of another statements, such as CREATE TABLE... of ALTER TABLE... 
+You can choose the name or system will provide it automatically.
+
+Constraints can be created in line and out of line.
+You can define multiple constraints in one SQL statement usin different techniques.
+
+in-line:
+column_name  data_type  constraint_type
+column_name  data_type  CONSTRAINT constraint_name constraint_type
+
+out-of-line:
+constraint_type (column_name)
+CONSTAINT <optinal_name> constraint_type (column_name)
+Note: out-of-line syntax cannot be used to create NOT NULL constraint
+
+----- CREATE TABLE: In-Line Constraints -----
+
+CREATE TABLE ports (
+    port_id    NUMBER PRIMARY KEY,   # constraint is a part of declaration (name will be added automatically as SYS_...)
+    port_name  VARCHAR(20),
+    location   VARCHAR(20) NOT NULL
+  );
+ or
+
+CREATE TABLE ports (
+    port_id    NUMBER CONSTRAINT port_id_pk PRIMARY KEY,  
+    port_name  VARCHAR(20),
+    location   VARCHAR(20) CONSTRAINT location_nn NOT NULL
+  );
+
+
+----- CREATE TABLE: Out-of-Line Constraints -----
+created after column specification
+Note: NOT NULL constraint cannot be declared with 'out-of-line'format
+
+  CREATE TABLE positions (
+    position_id    NUMBER,
+    position       VARCHAR(20),
+    exempt         CHAR(2),
+    PRIMARY KEY (position_id)   # after column specification
+  );
+ or
+
+ CREATE TABLE positions (
+    position_id    NUMBER,
+    position       VARCHAR(20),
+    exempt         CHAR(2),
+    CONSTRAINT positions_pk PRIMARY KEY (position_id)   # creating constraint - name - position_pk, applied to position_id column
+);
+
+----- ALTER TABLE: MODIFY - RENAME (equivalent to 'in-line') ----
+
+Note: valid for all typed of constraints (including NOT NULL)
+
+  CREATE TABLE ports (
+    port_id    NUMBER PRIMARY KEY,   
+    port_name  VARCHAR(20),
+  );
+
+ALTER TABLE ports 
+   MODIFY port_id PRIMARY KEY;     # name will be generated automatically
+
+# to check the name of the created constraint
+SELECT CONSTRAINT_NAME 
+FROM USER_CONSTRAINTS
+WHERE TABLE_NAME = 'ports'
+
+# rename constraints
+ALTER TABLE ports
+  RENAME CONSTRAINT SYS_name TO port_id_pk
+
+----- ALTER TABLE - ADD  (equivalent to 'out-of-line')
+  
+Note: NOT NULL constraint cannot be declared with this format (equivalent to 'out-of-line')
+  
+ALTER TABLE ports 
+   ADD PRIMARY KEY (port_id);  #name will be generated automatically
+or
+ALTER TABLE ports 
+   ADD CONSTRAINT port_id_pk PRIMARY KEY (port_id); 
