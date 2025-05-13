@@ -1,0 +1,20 @@
+***** MERGE ROWS INTO TABLE *****
+
+MERGE - combines the functionality of INSERT, UPDATE, and DELETE, all into a single SQL statement.
+
+If it is possible to use MERGE, then it is preferable to use it (more efficient - singe statement - single pass through DB)
+Good for application built wit distributed architecture.
+
+MERGE INTO table                                  # target - table or updatable view; required
+USING table | subquery                            # source - table, view, subquery; required
+ON condition                                      # behaves as WHERE; boolean; required; in practice usually comparing PK values
+WHEN MATCHED THEN 
+  UPDATE
+    SET col = expression  DEFAULT
+  WHERE clause
+  DELETE where_clause
+WHEN NOT MATCHED THEN INSERT (col1, col2)
+                      VALUES (expr1, expr2  | DEFAULT)
+                      wher_clause
+WHERE condition;
+  
