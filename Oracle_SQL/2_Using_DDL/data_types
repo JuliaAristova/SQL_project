@@ -34,28 +34,45 @@ It is possiblle for users to create their own unique "user-defined" data types. 
             Does not add blanks to values.
 
 ***** DATE *****
+
 Date type consists of fields (year, month, day, hour, minute, second, timezone_hour,timezone_minute, 
 timezone_region, tmiezone_abbr). Each fiels is a component of a date or time.
                          
 DATE  - accepts date and time information. Fields include year, month, date, hour, minute, and second.
         Date literals - in a single quotes.
-              
+        NLS_DATE_FORMAT - default Oracle date format (DD-MON-RR, ex 01-APR-25)
+        (somitemes default - NLS_DATE_TERRITORY - use SHOW PARAMETER NLS_DATE_TERRITORY)
+        To see:
+        SELECT SYS_CONTEXT('USERENV', 'NLS_DATE_FORMAT') NLS_DATE_FORMAT FROM employees;
+        can be changed with ALTER SESSION or ALTER SYSTEM
 
                          
 TIMESTAMP(n) - extension to DATE (adds fractional second precision). n range 0-9, if omitted - 6
+
 TIMESTAMP(n) WITH TIME ZONE - variation of TIMESTAMP (adds time zone region name or an offset for time zone)
                          n range 0-9, if omitted - 6
                       
 TIMESTAMP(n) WITH LOCAL TIME ZONE - variation of TIMESTAMP. Offset(n) is not stored, it is calculated automatically
                          when value is accessed from a different time sone. (if omitted n = 6)
-INTERVAL YEAR(n) TO MONTH - stores a span of time defined in inly year and month values. 
+                         End users see the time in the local time zone.
+
+INTERVAL YEAR(n) TO MONTH - stores a span of time defined in only year and month values. 
                          n - number of digits used to define the YEAR value.
                          n range 0-9, if omitted - 2
+                         Useful for storing difference between 2 date values
+
 INTERVAL DAY(n1) TO SECOND(n2)- stores a span of time defined in days, hours, minutes, and seconds. 
                          n1 - precisions for days (n range 0-9, if omitted - 2)
                          n2 - precision for seconds (n range 0-9, if omitted - 6)
+                         Useful for storing difference between 2 date values
+
 
 ***** LARGE OBJECTS *****
+
+LOB can be used like other data types. 
+Table can have ,ultiple columns with LOB data types.
+LOB cannot be used as PK
+LOB cannot be used with DISTINCT, GROUP BY, ORDER BY, or joins.
 
 BLOB - 'binary large object' (image, video files, starting size 4 GB)
 CLOB - 'character large object' (accepts text data elements)
