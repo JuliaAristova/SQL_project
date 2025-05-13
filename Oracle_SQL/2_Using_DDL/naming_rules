@@ -8,24 +8,10 @@
 6. These rules applies to all DB objects.
 7. Quated names (CREATE TABLE "Companies") - may begin with any charactes, contain spaces, reserved words, are case sensitive.
    Not recommended to use. 
+8. DB objects that share namespace must have unique names
+9. Each User and Role objects must have unique names
+10. You can create Constraint without providing the name (will be provided by system automatically, can be overridden)
+11. Be consistent in naming (ex., tables with last_name column - give the same column name for each of these tables)
+12. Use standard prefixe for a every DV object that's associated with a particular application (ex., HR_), 
+    avoid Oracle prefixes (SYS_, ALL_, DBA_, GV$, NLS, ROLE_, USER, V$)
 
-CREATE TABLE "Companies" (
-   company_id   NUMBER
-);
-
-SELECT * FROM "Company";  # to query - need to use name in ""
-
-NAME SPACE - a logically boundary within the database that encompassed a particular set of DB object.
-Objecta within the same namespace must have unique names.
-
-DATABASE:
-Namespace: Users, Roles
-Namespace: Public Synonyms
-Schema 1:
-   Namespace: Tables, Views, Sequences, Private Synonyms, User-Defined Types
-   Namespace: Indexes
-   Namespace: Constraints
-Schema 2:
-    Namespace: Tables, Views, Sequences, Private Synonyms, User-Defined Types
-   Namespace: Indexes
-   Namespace: Constraints
