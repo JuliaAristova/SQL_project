@@ -1,0 +1,68 @@
+Each columns must be assigned a data type. 
+A column data tye defines what sort of information is and is not accepted as input into the column.
+  
+Categories (built-in):
+- numeric
+- character 
+- date
+- LOB - large object - can include charager data, but cannot be included in a primary key,
+        DISTINCT, GROUP BY, ORDER BY, or joins
+
+It is possiblle for users to create their own unique "user-defined" data types. (CREATE TYPE)
+          
+  ***** NUMERIC TYPE *****
+
+  NUMBER(n,m) - accepts 0, negative, positive numbers
+          n - precision (max numbers of digits before and after decimal point; optional; range 1-38
+          m - scale (maximum number of digits after decimal point); optional; range -84 - 127
+          if n is specified, m is omited - m defaults to  0
+          when n is specified and greated number is inserted -- error
+          m - is rounded to (-m - specifies how many significant digits to the left of the decimal point will be punded off)
+
+          NUMBER(2)      4.56    --> 5
+          NUMBER(5, 2)   4.56    --> 4.56
+          NUMBER(5,2)    4.5678  --> 4.57
+          NUMBER(5, -2)  1059.34 --> 1100
+          NUMBER(3, 2)   14.56   --> error
+
+
+  *** CHARACTER TYPE *****
+          
+  CHAR(n) - fixed length alphanumeric value (max n, optional). 
+            If value < n - spaces are added, if > n - error. Default max = 2000
+  VARCHAR2(n) - 'variable character', fixed lengt alphanumeric value (max n, must be specified, 1 char upto 4000 bytes). 
+            Does not add blanks to values.
+
+***** DATE *****
+Date type consists of fields (year, month, day, hour, minute, second, timezone_hour,timezone_minute, 
+timezone_region, tmiezone_abbr). Each fiels is a component of a date or time.
+                         
+DATE  - accepts date and time information. Fields include year, month, date, hour, minute, and second.
+        Date literals - in a single quotes.
+              
+
+                         
+TIMESTAMP(n) - extension to DATE (adds fractional second precision). n range 0-9, if omitted - 6
+TIMESTAMP(n) WITH TIME ZONE - variation of TIMESTAMP (adds time zone region name or an offset for time zone)
+                         n range 0-9, if omitted - 6
+                      
+TIMESTAMP(n) WITH LOCAL TIME ZONE - variation of TIMESTAMP. Offset(n) is not stored, it is calculated automatically
+                         when value is accessed from a different time sone. (if omitted n = 6)
+INTERVAL YEAR(n) TO MONTH - stores a span of time defined in inly year and month values. 
+                         n - number of digits used to define the YEAR value.
+                         n range 0-9, if omitted - 2
+INTERVAL DAY(n1) TO SECOND(n2)- stores a span of time defined in days, hours, minutes, and seconds. 
+                         n1 - precisions for days (n range 0-9, if omitted - 2)
+                         n2 - precision for seconds (n range 0-9, if omitted - 6)
+
+***** LARGE OBJECTS *****
+
+BLOB - 'binary large object' (image, video files, starting size 4 GB)
+CLOB - 'character large object' (accepts text data elements)
+NCLOB - accepts CLOB data in Unicode
+
+Note: Oracle corporation discourages to use LONG and encourages to convert LONG data types to LOB data types.
+
+
+
+                         
