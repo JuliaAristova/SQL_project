@@ -1,0 +1,87 @@
+EXTERBAL TABLE  - read-only table that defined within the DB but exists outside the DB (its metadate stored in the DB, its data - outside of DB).
+                  The process that supports them has its root and syntax in the SQL*Loader tool or Oracle Data Pump.
+- can query with SELECT
+- can create an index
+- cannot use any other DML (INSERT, UPDATE, DELETE)
+- do not accept any constraints
+
+Flat data transfer: data source (web source reference, spreadsheet apps, legacy 3GL apps) can be structured the way that SQL external table can recognize
+and be able to query.
+
+***** CREATE EXTERNAL TABLE *****
+
+- can declare columns and data types
+- can populate with a subquery 
+- LOB (CLOB, BLOB, NCLOB) cannot be used
+- cannot add constraints
+- cannot set UNSUED (column will be dropped)
+
+***** DIRECTORY OBJECTs *****
+
+- identify the location of an external file containing the table
+
+CREATE OR REPLACE DIRECTORY directory_name 
+AS directory_reference;                       # in single quotes
+
+Example:
+CREATE OR REPLACE DIRECTORY Bank_Fies
+AS 'F:\bnk_files\trnsfr';                     # DB now has object Bank_Files
+
+After creating --> grant access (READ or/and WRITE)
+
+GRANT READ ON DIRECTORY
+directory_name TO username;
+
+***** ORACLE UTILITIES *****
+- SQL* Loader
+- Oracle Data Pump Export
+- Oracle Data Pump Import
+
+Utilities provide capabilities that allow external data sources to communicate with SQL objectswithin the DB.
+
+***** CREATING EXTERNAL TABLE *****
+
+Data:
+INVOICE_DATA.txt
+ID      INV_DATE      ACCT_NO
+-------------------------------
+701    03/15/09        CODDA009
+702    03/17/09        CODDA010
+703    03/18/09        CODDA011
+
+File System:
+- navigate to the drive where the DB resided
+- create subdir (LOAD_INVOICES) off of the root level
+- put INVOICE_DATA.txt in LOAD_INVOICES
+
+CREATE DIRECTORY INVOICE_FILES AS '\LOAD_INVOICES';
+
+# creating a table
+CREATE TABLE INVOICES_EXTERNAL (             
+  INVOICE_ID      CHAR(3),
+  INVOICE_DATE    CHAR(9),
+  ACCOUNT_NUMBER  CHAR(13)
+)
+# making it external
+ORGANIZATION EXTERNAL (                                  #required
+  TYPE ORACLE_LOADER                                     #can be ORACLE DATAPUMP 
+  DEFAULT  DIRECTORY INVOICE_FILES
+  ACCESS PARAMETERS (RECORDS DELIMETED BY NEWLINE        #  each new line starts a new row of data for the INVOICE_EXTERNAL table
+                      SKIP 2                             #  skip two first line in INVOICE_DATA.txt - header
+                      FIELDS (INVOICE_ID      CHAR(3),   #  columns should match INVOICE_DATA.txt
+                              INVOICE_DATE    CHAR(9),
+                              ACCOUNT_NUMBER  CHAR(13))
+                    )
+  LOCATION ('INVOICE_DATA.TXT')
+);
+
+# using a table
+
+SELECT * FROM INVOICES_EXTERNAL;
+
+# you can clean and reformat the data
+
+SELECT TO_NUMBER (INVOICE_ID),
+       TO_DATE(INVOICE_DATE, 'MM/DD/RR') INVOICE_DATE,
+       LTRIP(ACCOUNT_NUMBER, ' ') ACCOUNT_NUMBER
+FROM INVOICES_EXTERNAL;
