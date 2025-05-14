@@ -35,9 +35,9 @@ DROP COLUMN ... CASCADE CONSTRAINT - drops the column and drops the associated c
 - error when you try to SET UNUSED not-existing column or a column with constraint
 - to see UNUSED columns - data dictionary view USER_UNUSED_COL_TABS (list of tables that contains them, not column names)
 
-ALTER TABLE order_returns SET UNUSED COLUMN criuse_order_date;   # limited to 1 column
+ALTER TABLE order_returns SET UNUSED COLUMN cruise_order_date;   # limited to 1 column
 or 
-ALTER TABLE order_returns set unused (criuse_order_date);        # multiple columns separated bu comma
+ALTER TABLE order_returns SET UNUSED (cruise_order_date);        # multiple columns separated by comma
 
 To drop unused columns:
 
