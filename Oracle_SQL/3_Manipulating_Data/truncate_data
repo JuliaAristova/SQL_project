@@ -4,14 +4,20 @@ TRUNCATE TABLE:
 - removes all the rows in a given table
 - removes all data in the associated indexes
 - does not fire any DML triggers
-- Leaves the table and index structure intact
-- Leaves all dependencies intact, such as child tables
-- data cannot be recoved
+
+Instead of DROP TABLE/CREATE TABLE
+- leaves the table and index structure intact
+- leaves all dependencies intact, such as child tables
+
+- data cannot be recovered
 - performs an implicit commit
 - required DROP_ANY_TABLE privilege
+
+Because of implicit commit
 - cannot be rolled back
 - does not work with FLASHBACK_TABLE
 - it is DDL statement
+
 
 TRUNCATE TABLE usage:
 - to remove all the rows of a table without firing any DML triggers
