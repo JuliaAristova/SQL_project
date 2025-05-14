@@ -31,3 +31,11 @@ constrains  - 2
 status column - DEFAULT value will be used if not provided in INSERT
 */
  
+/*
+To check SQL* PLUS
+DESC table_name
+Output:
+1 column - Name  - displays table's column names
+2 column - Null  - shows whether there is a NOT NULL constraint applied to that particular column in the table
+3 colum - Type  - shows the data tyoe for the particular table's column
+*/
