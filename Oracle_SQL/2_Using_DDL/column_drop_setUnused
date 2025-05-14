@@ -1,37 +1,45 @@
-If there are some columns you do nor need, you can drop them or set as unused.
+If there are some columns you do not need, you can drop them or set as unused.
   
 ***** DROP COLUMN *****
   
 - Any constraints or indeces will be also droped
 - you cannot remove final remaining column in the a table, at least one column must remain in the table
 
-ALTER TABLE order_returns DROP COLUMN criuse_order_date;   #limited to 1 column
+ALTER TABLE order_returns DROP COLUMN criuse_order_date;   # limited to 1 column
 or 
-ALTER TABLE order_returns DROP (criuse_order_date);  #multiple columns separated bu comma
+ALTER TABLE order_returns DROP (cruise_order_date);        # multiple columns separated by comma
 
 Note:
-- if a column is references by a FK constraint in another table, dropping it will result in error
-- you can delete FK column in a child table directly
+- if a column is referenced by a FK constraint in another table, dropping it will result in error
+- you can delete FK column in a child table directly (column and constraint will be removed)
 - if FK is compound, you must to use CASCADE CONSTRAINT if you want to remove only one column
 
 ALTER TABLE order_returns 
-DROP COLUMN criuse_order_id
-CASCADE CONSRTRAINTS;    #will drop the column and any constraints of the column    (CONSTAINT or CONSTRAINTS)
+DROP (cruise_order_id, cruise_order_date); 
+or
+ALTER TABLE order_returns 
+DROP COLUMN cruise_order_id
+CASCADE CONSRTRAINTS;          # will drop the column and any constraints of the column    (CONSTRAINT or CONSTRAINTS)
+
+DROP COLUMN ... CASCADE CONSTRAINT - drops the column and drops the associated constraints on the column 
 
 ***** UNUSED *****
   
-- Once a column has been set to UNUSED, it can never be recovered (ROLLBACK statement will have not effect)
+- Once a column has been set to UNUSED, it can never be recovered (ROLLBACK statement will have no effect)
+- You can add a new column with the same name as the column set UNUSED
 - Any constraints or indeces on the column will be also droped
 - Fast execution (you can DROP column later)
 - 1000 is limit of columns in a table. If you set a column is UNUSED, it is still count as a part of a table.
 - you cannot SET UNUSED final remaining column in the a table, at least one column must remain in the table
 - USER_UNUSED_COL_TABS - gives you names of any and all tables that contain unused columns
+- error when you try to SET UNUSED not-existing column or a column with constraint
+- to see UNUSED columns - data dictionary view USER_UNUSED_COL_TABS (list of tables that contains them, not column names)
 
-ALTER TABLE order_returns SET UNUSED COLUMN criuse_order_date;   #limited to 1 column
+ALTER TABLE order_returns SET UNUSED COLUMN criuse_order_date;   # limited to 1 column
 or 
-ALTER TABLE order_returns set unused (criuse_order_date);  #multiple columns separated bu comma
+ALTER TABLE order_returns set unused (criuse_order_date);        # multiple columns separated bu comma
 
 To drop unused columns:
 
 ALTER TABLE table_name
-  DROP UNUSED COLUMNS;
+DROP UNUSED COLUMNS;
