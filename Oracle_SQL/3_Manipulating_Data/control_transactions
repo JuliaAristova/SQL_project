@@ -8,7 +8,7 @@ TCL provide the functionality to save or undo the changes made with DML statemen
 - saves changes to the DB since the session hegan or since the most recent commit in the session
 - make changes to the DB permanent (cannot be ROLLBACK)
 
-Transaction - series of SQL statement, considered as one union. Commit event completes transaction.
+Transaction - series of SQL statements, considered as one union. Commit event completes transaction.
 
 >>> EXPLICIT COMMIT - when COMMIT statement is executed.
         COMMIT;
@@ -17,7 +17,7 @@ Transaction - series of SQL statement, considered as one union. Commit event com
 >>> IMPLICIT COMMIT - occurs automatically when certain DB events occur.
 Events:
 - immediately before and ofter an attempt to execute any DDL (Create, Alter, Drop, Grant, Revoke)
-- normsl exit from most of Oracle's utilities and tools.
+- normal exit from most of Oracle's utilities and tools.
   
 ***** ROLLBACK *****
   
@@ -38,7 +38,7 @@ ROLLBACK WORK TO savepoint_name:
 
 ***** SAVEPOINT *****
 
-- establishes demarcation points withina transaction to empower any following COMMIT and ROLLBACK statements
+- establishes demarcation points within a transaction to empower any following COMMIT and ROLLBACK statements
 to subdivide the points at which data may later be optionally saved or undone.
 - SAVEPOINT marks system change number (SCN).
 
