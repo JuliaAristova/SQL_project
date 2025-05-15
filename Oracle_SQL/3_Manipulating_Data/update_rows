@@ -5,10 +5,10 @@ UPDATE - to modify existing data in th DB
 - can work with TABLEs and certain VIEWs
 - violation of constraints results in runtime error (entire UPDATE statemnt will be rejected)
 - WHERE clause specifies row to be updated (if ommitted all raws will be updated)
-- can use expression: literal values, mathemarical equation, SQL functions
+- can use expression: literal values, mathematical equation, SQL functions
 
 UPDATE table_name 
-  SET cruise_name = 'Bahamas'.          # columns in any orderr 
+  SET cruise_name = 'Bahamas'.          # columns in any order
       start_date = '01-DEC-11',
 WHERE cruise_id = 1;
 
