@@ -27,7 +27,7 @@ In a single comparison, both expressions should be the same data type.
 Comparison is case-sensitive by default.
 
 Numeric - smaller numbers are less than greater numbers
-Character - A < Z, Z , a, '2' > '10'
+Character - A < Z, Z < a, '2' > '10'
 Dates - earlier dates are less than later dates.
 
 >>> LIKE 
