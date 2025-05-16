@@ -1,0 +1,19 @@
+SUBQUERY - SELECT statement witin a larger SELECT statement (child query inside of parent query = outer= top level)
+
+- subquery can be in SELECT, INSERT, UPDATE, MERGE, and DELETE
+- can be used in DDL - CREATE TABLE, CREATE VIEW
+- can be stand-alone or correlated ((they contain references that tie them into their parent queries)
+- can return 1+ columns, 1+ rows; output usually used by parent query
+- parent query can contain  few child queries
+- subqueries can be nested (top-level, outer query - inner query)
+- subquery often retrieve data from other table(s) than parent query does; no logical relationship needed
+
+USAGE:
+- Creating complex multistage queries:
+  1 - subquery filters some data with WHERE
+  2 - pass the data to another subquery - secondary answer
+  3 - pass the answer to parent query
+- Creating populated tables - can be incorporated into CREATE TABLE statement or UPDATE to move large amount of data from one source to another
+- Creating named views - create a view objects containing required information
+- Defining dynamic view - to replace a table reference in a FROM clause (inline view)
+- Defining dynamic expressions with scalar subqueries - subquery return only one column's worth of data in one row - single value (alternative to expression)
