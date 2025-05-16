@@ -7,13 +7,18 @@ Purpose:
   such as input data for an INSERT/UPDATE, criteria of HAVING/GROUP BY, etc.)
 - scope of variable - session
 
-  SELECT room_numer, style, windor
-  FROM ship_cabin
-  WHERE room_number = &RNO          # prefix ampersand  &, variable name (alphanumeric, no spaces)
-  ORDER BY room_number;             # During the execution you will be prompt to enter room number
+  1  SELECT room_number, style, window
+  2  FROM ship_cabin
+  3  WHERE room_number = &RNO          # prefix ampersand  &, variable name (alphanumeric, no spaces)
+  4  ORDER BY room_number;             # During the execution you will be prompt to enter room number
 
   Legal syntax:  WHERE window = '&window_type'      # enter Ocean
                  WHERE windor = &window_type;       # enter 'Ocean'
+
+During the execution - prompt:
+Enter value for RNO:  --> entered 104
+old  3: WHERE room_number = &RNO
+new  3: WHERE room_number = 104
 
 ***** DEFINE & UNDEFINE commands *****
 
