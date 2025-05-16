@@ -1,0 +1,15 @@
+***** TYPES of SUBQUERIES *****
+
+>>> Single-row subqueries - return single row as a result (one or multiple columns)
+
+>>> Multiple-row subqueries  - return 0, one, or more rows as a result. Result shoul match what parent query is 
+    used as input
+
+>>> Multiple-column subqueries - return more than one column in their result; can be single- or multiple-row subquery
+
+>>> Correlated subquery - a subquery that specifies columns that belong to tables that are also 
+    referenced by the parent query; n be single- or multiple-row, or multiple-column subquery.
+    Performs row-by-row analysis in cooperation with the parent query.
+
+>>> Scalar subqueries - if a single-row aubquery consists of only one column's worth of output.
+    Can be used in almost any location that an expression can be used. Can be correlated.
