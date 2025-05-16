@@ -1,0 +1,19 @@
+***** Problems Subquery can Solve *****
+
+- ideal for finding data that is at the top of some scale, below/above average, somthing comparable
+  
+  example: Find all sales representative whose total sales was above avg sale in previous year
+  SELECT rep
+  FROM sales_data
+  WHERE year = 2018 and total_sales > ( SELECT AVG(total_sales) avg_sales
+                                        FROM sales_data
+                                        Where year = 2017)
+
+  - populate a table using 0 to more source rows within INSERT statement
+  - create a VIEW
+  - to specify values assigned to an UPDATE statement
+  - to perform comparisons against aggregated results
+  - to create inline views - subquery in FROM clause of SELECT statement (can be multiple levels)
+  - as an alternative to expressions
+  - to nest other queries (in the WHERE clause, up to 255 queries)
+  - to have a correlated subquery within a SELECT, UPDATE, or DELETE
