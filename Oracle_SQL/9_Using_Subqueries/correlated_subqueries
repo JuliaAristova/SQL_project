@@ -1,0 +1,40 @@
+CORRELATED SUBQUERY - is a query that is integrated with a parent query.
+- sometimes can cause performance issue
+- sometimes the only way to get the required result
+
+>>> QUERY with Correlated Subquery
+
+Task: List all the cabins in the ship whose size (sq_ft column) is larger that the average
+cabin for its room_style
+Solution:
+- identify average for each room_style
+- use average to display only those whose size is greater
+
+SELECT ship_cabin_id, room_n, room_style, sq_ft 
+FROM ship_cabin sc                        # alias is required when conflict name exists
+WHERE sc.sq_ft > (
+  SELECT AVG(sq_ft), room_style            # not stand-alone query, cannot be executed alone    
+  WHERE room_style = sc.room_style);       # correlation
+
+>>> UPDATE with Correlated Subquery
+
+- in the SET clause
+- in the WHERE clause
+
+Task: Review history of invoices and give 10% discount to whomever placed single biggest order for their respective quarter.
+- identify the highest total_price for any given quarter (extract quarter from order_date)
+- update invoice if it has the highest total_price
+
+UPDATE invoices inv
+SET terms_of_discount = '10 PCT'
+WHERE total_price = ( SELECT MAX(total_sales) FROM invoices
+                      WHERE TO_CHAR(invoice_date, 'RRRR-Q') = TO_CHAR(inv.invoice_date, 'RRRR-Q')
+                     );
+
+>>> DELETE with Correlated Subquery
+
+DELETE FROM ship_cabins S1
+WHERE S1.balcony_sq_ft = (
+      SELECT MIN(balcony_sq_ft) FROM ship_cabins S2
+      WHERE S1.roome_type = S2.room_type AND S1.room_style = S2.room_style);
+
