@@ -1,0 +1,10 @@
+EXISTS - tests for existence of any row in a subquery
+no rows found --> FALSE, otherwise --> TRUE
+NOT EXISTS - reverse the results
+
+# sometimes referred as a semijoin
+SELECT port_id. port_name
+FROM ports p1
+WHERE EXIStS (
+    SELECT * FROM ships s1
+    WHERE p1.port_id = s1.home_port_id);
