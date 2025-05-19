@@ -1,0 +1,22 @@
+WITH - clause of the SELECT statement to assign a name to a subquery block.
+You can use the assigned name from elswhere in the query.
+
+Subquery Factoring Clause - the series of one or more subquery blocks defined BEFORE the SELECT 
+WITH can define one aubquery factoring clause 
+
+Internally, Oracle SQL treats query within the WITH as a temporary table or as an inline view.
+
+WITH 
+  port_bookings AS (                                                # subquery name
+        SELECT p.port_id. p.port_name, count(s.ship_id_ CT          # subquery 1
+        FROM ports p, ships s
+        WHERE p.port_id = s.home_port_id
+        GROUP BY p.port_id, p.port_name
+        ),
+  densest_port AS (                                                  # subquery name
+        SELECT MAX(ct) max_ct                                        # subquery 2
+        FROM port_bookings
+        )
+SELECT port_name
+FROM port_bookings
+WHERE ct = (SELECT max_ct FROM densest_port_;
