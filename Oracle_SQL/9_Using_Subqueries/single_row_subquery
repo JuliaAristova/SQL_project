@@ -1,0 +1,19 @@
+Single-row subquery - returns one row
+
+Single-row subqueries are useful for performing multistep queried when you can guarantee that the subquery 
+will return a single row.
+
+Task: find employees who assigned to the same ship as Al Smith
+
+SELECT employee_id, first_name, last_name 
+FROM employees
+WHERE ship_id = ( SELECT ship_id                      # = --> expected single-row
+                  FROM employees
+                  WHERE firts_name = 'Al' AND last_name = 'Smith')
+AND NOT (firts_name = 'Al' AND last_name = 'Smith');
+
+To ensure that subquery returns 1 row response:
+- WHERE with PK or other unique value --> will return only one value
+- subquery returns aggregate function (SELECT MIN(ship_id) ...)
+- use ROWNUM (WHERE last_name = 'Smith' AND ROWNUM < 2)
+- if subquery returns 0 row --> NULL value --> to parent query 
