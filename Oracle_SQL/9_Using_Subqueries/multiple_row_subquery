@@ -1,0 +1,23 @@
+Multiple-row subquery may return more than one row of answers to the parent query.
+
+SELECT ship_id, last_name, first_name
+FROM employees
+WHERE ship_id IN ( SELECT ship_id FROM employees    # IN allows subquery to return multiple values
+                   WHERE last_name = 'Smith')
+ORDER BY ship_id, last_name;
+
+>>> Multirow subquery comparison conditions
+- IN - compares to a set of zero or more values
+- NOT - used with IN to reverse the results
+- ANY - used in combination with single-row comparison conditions (=. >, <). TRUE if at list one row matched
+- SOME - same as ANY
+- ALL -  used in combination with single-row comparison conditions. Consistemnty match with each row
+         SELECT * FROM products
+         WHERE price > ALL ( SELECT price FROM products WHERE category = 'Luxury');
+
+  Note:
+  NOT IN comparison operator runs the risk not to identify rows if there are some NULLs. Solution - to exclude NULLs
+
+  SELECT * FROM parent
+  WHERE house NOT IN ( SELECT house FROM kid
+                        WHERE house is NOT NULL)
