@@ -9,7 +9,13 @@ Entity-Relationship Diagram (ERM)
 The table is a physical implementation of an entity (columns is physical implementation of an entity's attribute).
 Relationship specifies how two entities relate to each other.
 
+PRIMARY KEY - unique identifier for a row in a particular table.
+FOREIGN KEY - a copy of some (or all) of one table's Primary key data in a second table,
+so that the second table can relate to the first.
+
 Relationship between entities:
 - one-to-one
 - one-to-many
 - many-to-many
+
+The presence many-to-many relationship is a flag - data model is missing an entity (this entity is more abstract by nature)
