@@ -53,3 +53,28 @@ VALUES (seq_cruise_id.NEXTVAL, 'Hawaii and Back');
 
 Note: eventhough INSERT statement is failed sequence generator advanced by 1. Any attempt to invoke a sequence generator
 will advance the number count, even if the DML statement fails.
+
+***** INSERT from another table using SELECT *****
+
+INSERT INTO target_table (column1, column2, column3, ...)
+SELECT column1, column2, column3, ...
+FROM source_table
+WHERE conditions;
+
+Notes:
+The columns in the INSERT INTO clause must match the columns and data types of the SELECT result.
+You can apply transformations in the SELECT, like concatenating names or calculating values.
+  Example:
+  A source table called employees with columns: employee_id, first_name, last_name, salary.
+  A target table called high_earners with columns: emp_id, full_name, salary.
+  You want to insert employees with a salary greater than 10000 into high_earners.
+
+  INSERT INTO high_earners (emp_id, full_name, salary)
+    SELECT employee_id, first_name || ' ' || last_name, salary
+  FROM employees
+  WHERE salary > 10000;
+
+If you want to insert all rows from one table into another table with the same structure, you can omit the column list:
+  INSERT INTO target_table
+  SELECT * FROM source_table
+  WHERE conditions;
