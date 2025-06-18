@@ -1,14 +1,16 @@
-Multitable Inserts tasks:
-- query data from one table and inserts the data into multiple tables with conditional logic
+***** MULTITABLE INSERTS TASKS *****
+
+- query data from one table and insert the data into multiple tables with conditional logic
   (ex., transforming data into a series of archive tables)
 - exchange data between two similar systems of different requirements 
    (ex., transaction-based application and a data warehouse optimized for analysis)
 - support logical archiving at any level of detail with logical decision points embedded in the INSERT statement
-- Integrate complex queries with GROUP BY, HAVING, set operators, while moving any number of rows dynamically,
+- integrate complex queries with GROUP BY, HAVING, set operators, while moving any number of rows dynamically,
   distributing output into multiple data targets, and programming logical decision points to control data distribution.
 - transform data that is stored in rows and levels into a cross-distribution output
 
-Multitable Inserts Types:
+***** MULTITABLE INSERTS TYPES *****
+
 - Unconditional multitable INSERT statements process each of the INSERT statement's one or more INTO clauses
   without condition, for all rows returned by the subquery.
 - Conditional multitable INSERT statements use WHEN conditions before INTO clausees to determine whether the given 
@@ -16,6 +18,7 @@ Multitable Inserts Types:
   INTO clause that can be executed if none of the WHEN conditions is true.
 
 Multitable INSERT always uses a subquery (may return 0+ rows)
+
 >>> Unconditional multitable INSERT
 
   INSERT ALL                                # ALL - required
