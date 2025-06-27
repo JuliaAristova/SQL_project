@@ -1,0 +1,77 @@
+***** FLASHBACK OPERATIONS *****
+
+Some features required Oracle Enterprise Editions (ex., Flashback Table)
+
+To recover object/data it contains
+- Recovering complete tables you may have inadvertently dropped
+-  Recovering data changes within one or more tables resulting from a series of DML statements
+- Performing data analysis on data that;s been changed over perions of time
+- Comparing data that existed at one point in time with data that existed at another point in time
+- Performingqueries as of a prior time period.
+
+>>> RECOVER DROPPED TABLES
+
+FLASHBACK TABLE 
+Identify point of time:
+= Immediately prior to when a table was dropped
+- A specific time identified by a value of TIMESTAMO
+- A specific transaction identified by the system change number (SCN)
+- A predetermined event identified by a database object known as the RESTORE POINT
+
+FLASHBACK TABLE table_name TO ...
+     FLASHBACK TABLE table_name TO BEFORE DROP;     
+     FLASHBACK TABLE table_name TO BEFORE DROP RENAME TO new_table_name;
+FLASHBACK TABLE table_1, table_2, table_3 TO ...
+
+RECYCLE BIN
+ 
+After DROP TABLE, it is automatically placed into the Recycle bin.
+If a table is in the Recycle bin it can be restored.
+
+A user account’s dropped objects are retained in a separate recycle bin for each user.
+
+SELECT * FROM USER_RECYCLEBIN;     or 		
+SELECT * FROM RECYCLEBIN;
+SELECT * FROM DBA_RECYCLEBIN;		//DBA privileges
+
+Settings (initialization parameter file):
+ALTER SESSION SET recyclebin = ON;
+ALTER SESSION SET recyclebin = OFF;
+
+>>> Dependent Objects
+
+When table is recoverd, any accosiated dependent objects are also recovered:
+- indexes(except bitmap), with System assigned names (not user assigned)
+- constraints (not FK)
+- some other objects (ex, triggers)
+
+>>> PURGE
+
+permanently removed table from the Recycle Bin
+PURGE TABLE table_name;
+PURGE RECYCLEBIN;   --> to purge the schema's recycle bin entirely
+
+>>> FLASHBACK EXISTING TABLE
+
+1. FLASHBACK TABLE table_name TO SCN scn_expression;
+
+SCN is incremented each time a transaction is committed, and stored with each row in each table.
+SELECT ORA_ROWSCN , column_name
+FROM table_name;
+
+      SELECT DBMS_FLASHBACK.GET_SYSTEM_CHANGE_NUMBER FROM DUAL;
+
+FLASHBACK TABLE table_name TO TIMESTAMP timestamp_expression;
+       Possible where ROW MOVEMENT feature is enabled.
+
+CREATE TABLE table_name (col	DATATYPE, …)
+ENABLE ROW MOVEMENT;
+
+ALTER TABLE table_name
+ENABLE ROW MOVEMENT;
+
+FLASHBACK TABLE table_name TO RESTORE POINT  restore_point_expression;
+   Restore poit - DB object you create to represent a given moment in the DB,
+
+   CREATE RESTORE POINT balance_acct_01; 
+   FLASHBACK TABLE balances TO RESTORE POINT balance_acct_01;
