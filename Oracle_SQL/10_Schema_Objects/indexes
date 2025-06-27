@@ -1,0 +1,56 @@
+INDEXES
+
+Index - a database object that copies a subset of data from a table, 
+presorted, and intended to support faster quering on the indexed table.
+
+Oracle DB Optimizer  built-in function. It determinex how best to process any given SQL statement based on 
+structure and indexes.
+
+CREATE INDEX index_name ON table_name(column_name);
+
+Indexed column should be specified in a comparison of equality
+“Greater than” or some other comparisons may work
+“Not equal” will not invoke an index
+LIKE “Smith%” will may  work, LIKE “%Smith” - will not invoke an index
+Function on a column wil prevent the use of an index
+
+Indexes cannot be created on columns of LOB or RAW data types.
+Indexes are auomatically maintained. Each DML statement that required indexes update withh perform it.
+On average - no more than 5 indexec on a table.
+
+***** IMPLICIT INDEX CREATION *****
+
+CREATE TABLE statement - PK, UNIQUE  indexes created automatically
+
+***** EXPLICIT INDEX CREATION *****
+
+CREATE INDEX duration_ind on seminars(duration);  
+
+
+***** TO CHECK INDEXES *****
+
+SELECT table_name, index_name
+ FROM user_indexes
+ WHERE table_name = 'SEMINARS';
+
+SELECT index_name, column_name
+FROM user_ind_columns
+WHERE table_name = 'SEMINARS';
+
+***** COMPOSITE INDEX *****
+
+Bult on two or mre columns of a table 
+
+CREATE INDEX ind_inv_vendor_id ON invoices( vendor_id. invoice_date);
+
+When WHERE clause have both or first column of composite index - index is used
+if second  - not, but probubly yes because of Skip Scanning
+
+***** UNIQUR INDEx ***** 
+Ensures that a column in a table will contain unique information
+
+CREATE UNIQUE INDEX ind_smp_ssn ON employees (SSN);
+
+***** DROP INDEX *****
+
+DROP INDEX index_name;
