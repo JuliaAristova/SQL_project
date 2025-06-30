@@ -38,7 +38,7 @@ CREATE TABLE new_table_name AS (
 
 --alter table - rename column
 ALTER TABLE table_name
-RENAME COLUMNS old_name to new_name
+RENAME COLUMNS old_name TO new_name
 
 --SQL Server: EXEC sp_rename 'table_name.old_name', 'new_name', 'COLUMN'
 
