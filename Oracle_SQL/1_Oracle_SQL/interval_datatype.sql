@@ -1,0 +1,23 @@
+CREATE TABLE explDate (
+	durationYM	INTERVAL YEAR (2) TO MONTH,
+	notes		VARCHAR2(20)
+);
+
+
+INSERT INTO  explDate (durationYM, notes) values ('01-10', '01-10');
+INSERT INTO  explDate (durationYM, notes) values (INTERVAL '01-10' YEAR TO MONTH, 'INTERVAL ''01-10'' YEAR TO MONTH');
+INSERT INTO  explDate (durationYM, notes) values (INTERVAL '2' YEAR, 'INTERVAL ''2'' YEAR');
+INSERT INTO  explDate (durationYM, notes) values (INTERVAL '10' MONTH, 'INTERVAL ''10'' MONTH');
+INSERT INTO  explDate (durationYM, notes) values (INTERVAL '15' MONTH, 'INTERVAL ''15'' MONTH');
+
+
+CREATE TABLE explDate2 (
+	durationDS	INTERVAL Day(3) TO Second(2),
+	notes		VARCHAR2(20)
+);
+
+INSERT INTO explDate2 VALUES ('3 04:30:15.12', '3 04:30:15.12');
+INSERT INTO explDate2 VALUES (INTERVAL '3 23:30:15.12' DAY TO SECOND, 'INTERVAL ''3 23:30:15.12'' DAY TO SECOND');
+INSERT INTO explDate2 VALUES ('0 00:10:00', ''0 00:10:00'');
+INSERT INTO explDate2 VALUES (INTERVAL '0 12:00:00' DAY TO SECOND, 'INTERVAL ''0 12:00:00'' DAY TO SECOND');
+INSERT INTO explDate2 VALUES (INTERVAL '0 00:00:15' DAY TO SECOND, 'INTERVAL ''0 00:00:15'' DAY TO SECOND');
