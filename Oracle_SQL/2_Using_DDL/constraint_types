@@ -55,7 +55,7 @@ CREATE TABLE ships(
   ship_id    NUMBER,
   ship_name   VARCHAR(20),
   home_port_id  NUMBER NOT NULL,      # NOT NULL can be added if required
-  CONSTRAINT ships_port_pk FOREIGN KEY(home_port_id) REFERENCES ports(port_id)
+  CONSTRAINT ships_port_fk FOREIGN KEY(home_port_id) REFERENCES ports(port_id)
 
 NOTE: often it is easier to add FK constraints with ALTER TABLE when all the tables are created.
 You cannot add FK during CTAS - Create Table As Select)
@@ -69,7 +69,7 @@ CREATE TABLE ships(
   ship_id    NUMBER,
   ship_name   VARCHAR(20),
   home_port_id  NUMBER,         # we do not specify NOT NULL here as we specify it to be null on delete
-  CONSTRAINT ships_port_pk FOREIGN KEY(home_port_id) 
+  CONSTRAINT ships_port_fk FOREIGN KEY(home_port_id) 
                            REFERENCES ports(port_id)
                            ON DELETE SET NULL
 );
