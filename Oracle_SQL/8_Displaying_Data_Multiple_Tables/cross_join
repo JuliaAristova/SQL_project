@@ -1,0 +1,19 @@
+CROSS JOIN is a join of every row in the first table 
+to every row in the second table
+
+Example:
+Table employee - 107 rows
+Table departments = 27 rows
+
+Cross join 1-7 * 27 - 1889 rows
+
+Purpose: to produce test data
+
+SELECT table1.column, table2.column
+FROM table1
+[CROSS JOIN table2];
+
+select e.last_name, e.department_id, d.department_name
+from hr.EMPLOYEES e
+CROSS JOIN hr.departments d
+order by 2;
