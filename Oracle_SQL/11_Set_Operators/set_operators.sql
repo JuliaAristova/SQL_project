@@ -80,3 +80,28 @@ select email_address
 from contact_emails
 where status = 'valid'
 order by email;
+
+--Write a query to display a list of locations location id, city, address) that have no
+departments located in them, use the set operator to create a query
+
+select location_id, city, street_address
+from hr.locations
+MINUS
+select location_id,  TO_CHAR(NULL) city, TO_CHAR(NULL) street_adress
+from hr.departments
+order by location_id;
+
+or
+
+select location_id, city, street_address
+from hr.locations
+MINUS
+select location_id, TO_CHAR(NULL) city, TO_CHAR(NULL) street_adress
+from hr.departments
+order by location_id;
+
+-- Write a query to display a list of employeed (emp Id, job id) of those employees
+who currently hav a job that is the same as their previous one (they changed their job
+ but know they are doing the same job they did previously)
+
+
